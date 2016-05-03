@@ -10,7 +10,7 @@ export const createRoutes = (store) => {
   const routes = {
     path: '/',
     component: CoreLayout,
-    indexRoute: Home,
+    indexRoute: Home(store),
     getChildRoutes (location, next) {
       require.ensure([], (require) => {
         next(null, [
