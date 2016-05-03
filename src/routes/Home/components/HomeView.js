@@ -1,6 +1,11 @@
+/* @flow */
 import React from 'react'
 
-export const HomeView = (props) => (
+type Props = {
+  running: boolean
+}
+
+export const HomeView = (props: Props) => (
   <div>
     <h2>Home View</h2>
     {props.running
