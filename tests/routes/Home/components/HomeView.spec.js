@@ -1,17 +1,26 @@
 import React from 'react'
 import { HomeView } from 'routes/Home/components/HomeView'
-import { render } from 'enzyme'
+import { shallow } from 'enzyme'
 
-describe('(View) Home', () => {
-  let _component
+describe('(Component) Home', () => {
+  let _props, _wrapper
 
   beforeEach(() => {
-    _component = render(<HomeView />)
+    _props = {
+      running: true
+    }
+    _wrapper = shallow(<HomeView {..._props} />)
   })
 
-  it('Renders a welcome message', () => {
-    const welcome = _component.find('h2')
-    expect(welcome).to.exist
-    expect(welcome.text()).to.match(/Home View/)
+  it('Should render as a <div>.', () => {
+    expect(_wrapper.is('div')).to.equal(true)
+  })
+
+  it('Should render with an <h2> that includes Sample Counter text.', () => {
+    expect(_wrapper.find('h2').text()).to.match(/Home View/)
+  })
+
+  it('Should render props.counter at the end of the sample counter <h2>.', () => {
+    expect(_wrapper.find('span').text()).to.match(/^Running$/)
   })
 })
