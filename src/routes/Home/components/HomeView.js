@@ -1,6 +1,8 @@
 /* @flow */
 import React from 'react'
 
+import ModifyCountersContainer from '../containers/ModifyCountersContainer'
+
 type Props = {
   running: boolean
 }
@@ -10,7 +12,7 @@ export const HomeView = (props: Props) => (
     <h2>Home View</h2>
     {props.running
       ? <span>Running</span>
-      : <span>Not running</span>}
+      : <ModifyCountersContainer />}
   </div>
 )
 
