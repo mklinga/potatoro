@@ -5,45 +5,23 @@ import type { Timer, TimerType } from '../interfaces/timer'
 
 import styles from './ModifyCounters.scss'
 
+import ModifyCounter from './ModifyCounter'
+
 type Props = {
   changeDuration: (type: TimerType, duration: number) => Action,
   launch: () => Action,
   timers: Array<Timer>
 }
 
-const _changeDuration = (type: TimerType, changeDuration: Props.changeDuration) => {
-  return e => changeDuration(type, e.target.value)
-}
-
-const labels = {
-  WORK: 'Work period',
-  SHORT_PAUSE: 'Short break',
-  LONG_PAUSE: 'Long break'
-}
-
-const hasIssues: (timers: Array<Timer>) => boolean = (timers) => {
-  return !!timers.find(timer => timer.issues.length)
+export const hasIssues: (timers: Array<Timer>) => boolean = (timers) => {
+  return timers.reduce((issues, timer) => issues || timer.issues.length > 0, false)
 }
 
 export const ModifyCounters = (props: Props) => (
-  <div>
+  <div className={styles.modifyCounters}>
     <h3>Durations</h3>
-    {props.timers.map(timer => {
-      return (
-        <div key={timer.type} className={styles.timerRow}>
-          <label>{labels[timer.type]}</label>
-          <input
-            className={timer.issues.length && styles.hasIssues}
-            key={timer.type}
-            min={1}
-            max={120}
-            onChange={_changeDuration(timer.type, props.changeDuration)}
-            type='number'
-            value={timer.duration} />
-          <span>{' '}minutes</span>
-        </div>
-      )
-    })}
+    {props.timers.map(timer =>
+      <ModifyCounter key={timer.type} timer={timer} changeDuration={props.changeDuration} />)}
     <button disabled={hasIssues(props.timers)} onClick={props.launch}>Launch!</button>
   </div>
 )

@@ -1,22 +1,10 @@
-.timerRow {
-  label, input {
-    padding: 0.5rem;
+.modifyCounters {
+  button {
+    border: 1px solid #666;
+    background: white;
+    padding: 1rem;
+
+    &:hover:not(:disabled) { background: #eee }
+    &:disabled { color: gray; }
   }
-
-  input {
-    text-align: center;
-  }
-}
-
-.hasIssues {
-  border: 1px solid red;
-}
-
-button {
-  border: 1px solid #666;
-  background: white;
-  padding: 1rem;
-
-  &:hover:not(:disabled) { background: #eee }
-  &:disabled { color: gray; }
 }
