@@ -1,6 +1,16 @@
 /* @flow */
 
-import type { TimerType, Timer } from '../interfaces/timer'
+import type { Issue, TimerType, Timer } from '../interfaces/timer'
+
+// ------------------------------------
+// Validation
+// ------------------------------------
+
+const checkIssues: (duration: number) => Array<Issue> = (duration) => {
+  const hasIssues = (Number.isNaN(duration) || duration < 1 || duration > 180)
+
+  return hasIssues ? [{ msg: 'Invalid duration' }] : []
+}
 
 // ------------------------------------
 // Constants
@@ -29,7 +39,9 @@ const ACTION_HANDLERS = {
   [CHANGE_DURATION]:
     (state: Array<Timer>, action: { payload: { type: TimerType, duration: number } }): Array<Timer> => {
       return state.map(timer => {
-        return (timer.type === action.payload.type) ? ({ ...timer, duration: action.payload.duration }) : timer
+        return (timer.type === action.payload.type)
+          ? ({ ...timer, duration: action.payload.duration, issues: checkIssues(action.payload.duration) })
+          : timer
       })
     }
 }
@@ -39,9 +51,9 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 
 const initialState: Array<Timer> = [
-  { type: 'WORK', duration: 30 },
-  { type: 'SHORT_PAUSE', duration: 5 },
-  { type: 'LONG_PAUSE', duration: 15 }
+  { type: 'WORK', duration: 30, issues: [] },
+  { type: 'SHORT_PAUSE', duration: 5, issues: [] },
+  { type: 'LONG_PAUSE', duration: 15, issues: [] }
 ]
 
 export default function reducer (state: Array<Timer> = initialState, action: Action): Array<Timer> {
