@@ -1,7 +1,5 @@
 /* @flow */
 
-// import type { ZenObject, ZenStateObject } from '../interfaces/zen.js'
-
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -15,10 +13,6 @@ export function launch (): Action {
   return {
     type: LAUNCH_POTATORO
   }
-}
-
-export const actions = {
-  launch
 }
 
 // ------------------------------------
