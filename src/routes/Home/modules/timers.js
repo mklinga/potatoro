@@ -6,8 +6,8 @@ import type { Issue, TimerType, Timer } from '../interfaces/timer'
 // Validation
 // ------------------------------------
 
-const checkIssues: (duration: number) => Array<Issue> = (duration) => {
-  const hasIssues = (Number.isNaN(duration) || duration < 1 || duration > 180)
+export const checkIssues: (duration: number) => Array<Issue> = (duration) => {
+  const hasIssues = (Number.isNaN(+duration) || duration < 1 || duration > 180)
 
   return hasIssues ? [{ msg: 'Invalid duration' }] : []
 }

@@ -14,7 +14,7 @@ export const labels = {
   LONG_PAUSE: 'Long break'
 }
 
-const _changeDuration = (type: TimerType, changeDuration: Props.changeDuration) => {
+export const _changeDuration = (type: TimerType, changeDuration: Props.changeDuration) => {
   return e => changeDuration(type, e.target.value)
 }
 
