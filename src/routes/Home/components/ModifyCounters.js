@@ -8,7 +8,7 @@ import styles from './ModifyCounters.scss'
 import ModifyCounter from './ModifyCounter'
 
 type Props = {
-  changeDuration: (type: TimerType, duration: number) => Action,
+  changeDuration: (type: TimerType, duration: string) => Action,
   launch: () => Action,
   timers: Array<Timer>
 }

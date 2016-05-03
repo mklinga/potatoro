@@ -13,7 +13,7 @@ const mapStateToProps = (state: { timers: Array<Timer> }) => ({
 })
 
 type ActionCreators = {
-  changeDuration: (type: TimerType, duration: number) => Action,
+  changeDuration: (type: TimerType, duration: string) => Action,
   launch: () => Action
 }
 

@@ -1,7 +1,8 @@
 /* @flow */
 
 export type Issue = {
-  msg: string
+  msg: string,
+  value: any
 }
 
 export type TimerType = 'WORK' | 'SHORT_PAUSE' | 'LONG_PAUSE'

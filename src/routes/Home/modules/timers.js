@@ -1,15 +1,20 @@
 /* @flow */
 
 import type { Issue, TimerType, Timer } from '../interfaces/timer'
+import constants from '../constants'
 
 // ------------------------------------
 // Validation
 // ------------------------------------
 
-export const checkIssues: (duration: number) => Array<Issue> = (duration) => {
-  const hasIssues = (Number.isNaN(+duration) || duration < 1 || duration > 180)
+type DurationAndIssuesFunction = (duration: string) => { duration?: number, issues: Array<Issue> }
 
-  return hasIssues ? [{ msg: 'Invalid duration' }] : []
+export const durationOrIssues: DurationAndIssuesFunction = (duration) => {
+  const hasIssues = (Number.isNaN(+duration) || +duration < constants.timer.min || +duration > constants.timer.max)
+
+  return hasIssues
+    ? { issues: [{ msg: 'Invalid duration', value: duration }] }
+    : { duration: Number(duration), issues: [] }
 }
 
 // ------------------------------------
@@ -21,7 +26,7 @@ export const CHANGE_DURATION = 'CHANGE_DURATION'
 // Actions
 // ------------------------------------
 
-export function changeDuration (type: TimerType, duration: number): Action {
+export function changeDuration (type: TimerType, duration: string): Action {
   return {
     type: CHANGE_DURATION,
     payload: {
@@ -37,10 +42,10 @@ export function changeDuration (type: TimerType, duration: number): Action {
 
 const ACTION_HANDLERS = {
   [CHANGE_DURATION]:
-    (state: Array<Timer>, action: { payload: { type: TimerType, duration: number } }): Array<Timer> => {
+    (state: Array<Timer>, action: { payload: { type: TimerType, duration: string } }): Array<Timer> => {
       return state.map(timer => {
         return (timer.type === action.payload.type)
-          ? ({ ...timer, duration: action.payload.duration, issues: checkIssues(action.payload.duration) })
+          ? ({ ...timer, ...durationOrIssues(action.payload.duration) })
           : timer
       })
     }
