@@ -3,13 +3,17 @@ import { connect } from 'react-redux'
 
 import ModifyCounters from '../components/ModifyCounters'
 
-import { launch } from '../modules/home'
+import type { Timer } from '../interfaces/timer'
 
-const mapStateToProps = (state) => ({
-  a: 2
+import { launch } from '../modules/home'
+import { changeDuration } from '../modules/timers'
+
+const mapStateToProps = (state: { timers: Array<Timer> }) => ({
+  timers: state.timers
 })
 
 const mapActionCreators = {
+  changeDuration,
   launch
 }
 

@@ -38,7 +38,12 @@ const ACTION_HANDLERS = {
 // Reducers
 // ------------------------------------
 
-const initialState: Array<Timer> = []
+const initialState: Array<Timer> = [
+  { type: 'WORK', duration: 30 },
+  { type: 'SHORT_PAUSE', duration: 5 },
+  { type: 'LONG_PAUSE', duration: 15 }
+]
+
 export default function reducer (state: Array<Timer> = initialState, action: Action): Array<Timer> {
   const handler = ACTION_HANDLERS[action.type]
 
