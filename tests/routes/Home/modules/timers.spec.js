@@ -1,6 +1,6 @@
 import {
   CHANGE_DURATION,
-  checkIssues,
+  durationOrIssues,
   changeDuration,
   default as timersReducer
 } from 'routes/Home/modules/timers'
@@ -34,9 +34,9 @@ describe('(Redux Module) Timers', () => {
       state = timersReducer(state, {type: '@@@@@@@'})
       expect(state).to.eql(_initialState)
       state = timersReducer(state, changeDuration('WORK', '15'))
-      expect(state).to.eql(_setTimerDuration(_initialState, 'WORK', '15'))
+      expect(state).to.eql(_setTimerDuration(_initialState, 'WORK', 15))
       state = timersReducer(state, {type: '@@@@@@@'})
-      expect(state).to.eql(_setTimerDuration(_initialState, 'WORK', '15'))
+      expect(state).to.eql(_setTimerDuration(_initialState, 'WORK', 15))
     })
   })
 
@@ -58,12 +58,12 @@ describe('(Redux Module) Timers', () => {
   })
 
   describe('(Action Handler) CHANGE_DURATION', () => {
-    it('Should change the state by the action payload\'s "duration" property.', () => {
+    it('Should change the state by the action payload\'s "duration" property if it\'s valid.', () => {
       let _state = timersReducer(undefined, {})
       expect(_state).to.eql(_initialState)
 
       _state = timersReducer(_state, changeDuration('WORK', '1'))
-      let _expectedState = _setTimerDuration(_initialState, 'WORK', '1')
+      let _expectedState = _setTimerDuration(_initialState, 'WORK', 1)
 
       expect(_state).to.eql(_expectedState)
 
@@ -72,14 +72,29 @@ describe('(Redux Module) Timers', () => {
       expect(_state).to.eql(_expectedState)
 
       _state = timersReducer(_state, changeDuration('SHORT_PAUSE', '12'))
-      _expectedState = _setTimerDuration(_expectedState, 'SHORT_PAUSE', '12')
+      _expectedState = _setTimerDuration(_expectedState, 'SHORT_PAUSE', 12)
 
+      expect(_state).to.eql(_expectedState)
+    })
+
+    it('Should change only the \'issues\' value if duration is not valid.', () => {
+      let _state = timersReducer(undefined, {})
+      expect(_state).to.eql(_initialState)
+
+      // First valid state change
+      _state = timersReducer(_state, changeDuration('WORK', '1'))
+      let _expectedState = _setTimerDuration(_initialState, 'WORK', 1)
+      expect(_state).to.eql(_expectedState)
+
+      // This value should be invalid and thus set issues on the WORK timer
+      _state = timersReducer(_state, changeDuration('WORK', '-1'))
+      _expectedState[0].issues = [ { msg: 'Invalid duration', value: '-1' } ]
       expect(_state).to.eql(_expectedState)
     })
   })
 
-  describe('(Validation) checkIssues', () => {
-    const _test = num => checkIssues(num).length === 0
+  describe('(Validation) durationOrIssues', () => {
+    const _test = num => durationOrIssues(num).issues.length === 0
 
     it('Should return no issues for valid numbers', () => {
       ;['1', '2', '44', '99', '120', '180'].forEach(num => {
@@ -94,7 +109,18 @@ describe('(Redux Module) Timers', () => {
     })
 
     it('Should include \'msg\' field in issues', () => {
-      checkIssues(NaN)[0].should.have.property('msg')
+      durationOrIssues(NaN).issues[0].should.have.property('msg')
+    })
+
+    it('Should include \'value\' field in issues with attempted invalid value', () => {
+      durationOrIssues('-8').issues[0].should.have.property('value', '-8')
+      durationOrIssues('1000000').issues[0].should.have.property('value', '1000000')
+    })
+
+    it('Should transform valid strings into numbers', () => {
+      durationOrIssues('1').duration.should.eql(1)
+      durationOrIssues('60').duration.should.eql(60)
+      durationOrIssues('120').duration.should.eql(120)
     })
   })
 })
