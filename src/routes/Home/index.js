@@ -1,25 +1,16 @@
 /* @flow */
-
-/*
- * state: {
- *   running: bool
- *   current: number (index of sequence)
- *   elapsed: number
- *   timers: [
- *     { type: WORK, duration: 30, issues: [] }
- *     { type: SHORT_PAUSE, duration: 5, issues: [] }
- *     { type: LONG_PAUSE, duration: 15, issues: [] }
- *   ]
- *   sequence: [ WORK, SHORT_PAUSE, WORK, SHORT_PAUSE, WORK, LONG_PAUSE ]
- * }
- */
+import { injectReducer } from '../../store/reducers'
 
 export default (store: Object) => ({
   getComponent (nextState: Object, next: Function) {
     require.ensure([
+      './modules/home',
       './containers/HomeViewContainer'
     ], (require) => {
+      const homeReducer = require('./modules/home').default
       const HomeView = require('./containers/HomeViewContainer').default
+
+      injectReducer(store, { key: 'running', reducer: homeReducer })
 
       next(null, HomeView)
     })

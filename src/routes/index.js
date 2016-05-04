@@ -4,11 +4,21 @@ import Home from './Home'
 
 import Edit from './Edit'
 
-export const createRoutes = (store) => {
-/*  Note: Instead of using JSX, we are using react-router PlainRoute,
-    a simple javascript object to provide route definitions.
-    When creating a new async route, pass the instantiated store!   */
+/*
+ * state: {
+ *   running: bool
+ *   current: number (index of sequence)
+ *   elapsed: number
+ *   timers: [
+ *     { type: WORK, duration: 30, issues: [] }
+ *     { type: SHORT_PAUSE, duration: 5, issues: [] }
+ *     { type: LONG_PAUSE, duration: 15, issues: [] }
+ *   ]
+ *   sequence: [ WORK, SHORT_PAUSE, WORK, SHORT_PAUSE, WORK, LONG_PAUSE ]
+ * }
+ */
 
+export const createRoutes = (store) => {
   const routes = {
     path: '/',
     component: CoreLayout,

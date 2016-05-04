@@ -27,7 +27,6 @@ describe('(Container) ModifyCounterContainer', () => {
   it('Should set needed properties', () => {
     _wrapper.props().should.have.property('timers')
     _wrapper.props().should.have.property('sequence')
-    _wrapper.props().should.have.property('launch')
     _wrapper.props().should.have.property('changeDuration')
   })
 })

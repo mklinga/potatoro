@@ -11,7 +11,6 @@ import ToggleButton from 'components/ToggleButton'
 type Props = {
   changeDuration: (type: TimerType, duration: string) => Action,
   changeSequence: (amountOfshortBreaks: number) => Action,
-  launch: () => Action,
   timers: Array<Timer>,
   sequence: Array<TimerType>
 }
@@ -45,7 +44,6 @@ export const ModifyCounters = (props: Props) => (
 ModifyCounters.propTypes = {
   changeDuration: React.PropTypes.func.isRequired,
   changeSequence: React.PropTypes.func.isRequired,
-  launch: React.PropTypes.func.isRequired,
   timers: React.PropTypes.array.isRequired,
   sequence: React.PropTypes.array.isRequired
 }

@@ -21,6 +21,12 @@ describe('(Component) Home', () => {
   })
 
   it('Should render text "running" when props.running is true', () => {
-    expect(_wrapper.find('span').text()).to.match(/^Running$/)
+    _wrapper.find('span').text().should.match(/^Running$/)
+  })
+
+  it('Should render text "Not running" when props.running is false', () => {
+    _props.running = false
+    _wrapper = shallow(<HomeView {..._props} />)
+    _wrapper.find('span').text().should.match(/^Not running$/)
   })
 })
