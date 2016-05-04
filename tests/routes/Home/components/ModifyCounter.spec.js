@@ -66,6 +66,16 @@ describe('(Component) ModifyCounter', () => {
 
       expect(_input.prop('title')).to.equal('A serious issue')
     })
+
+    it('Should set input value from the issue when exists', () => {
+      expect(_input.prop('value')).to.equal(30)
+
+      _props.timer.issues = [ { msg: 'A serious issue', value: 'wrong' } ]
+      _wrapper = shallow(<ModifyCounter {..._props} />)
+      _input = _wrapper.find('input')
+
+      expect(_input.prop('value')).to.equal('wrong')
+    })
   })
 
   describe('_changeDuration wrapper', () => {
