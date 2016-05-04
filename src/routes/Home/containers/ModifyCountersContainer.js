@@ -10,6 +10,7 @@ import { changeDuration } from '../modules/timers'
 import { changeSequence } from '../modules/sequence'
 
 const mapStateToProps = (state: { timers: Array<Timer> }) => ({
+  sequence: state.sequence,
   timers: state.timers
 })
 

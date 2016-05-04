@@ -21,11 +21,13 @@ export default (store: Object) => ({
     require.ensure([
       './containers/HomeViewContainer',
       './modules/home',
-      './modules/timers'
+      './modules/timers',
+      './modules/sequence'
     ], (require) => {
       const HomeView = require('./containers/HomeViewContainer').default
       const homeReducer = require('./modules/home').default
       const timerReducer = require('./modules/timers').default
+      const seqReducer = require('./modules/sequence').default
 
       injectReducer(store, {
         key: 'running',
@@ -35,6 +37,11 @@ export default (store: Object) => ({
       injectReducer(store, {
         key: 'timers',
         reducer: timerReducer
+      })
+
+      injectReducer(store, {
+        key: 'sequence',
+        reducer: seqReducer
       })
 
       next(null, HomeView)
