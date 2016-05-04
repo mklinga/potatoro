@@ -1,6 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { ModifyCounters, hasIssues } from 'routes/Home/components/ModifyCounters'
+import { ModifyCounters, hasIssues, getActiveFromSequence } from 'routes/Home/components/ModifyCounters'
+import { ALLOWED_SEQUENCES } from 'routes/Home/modules/sequence'
 import { shallow } from 'enzyme'
 
 describe('(Component) ModifyCounters', () => {
@@ -14,9 +15,11 @@ describe('(Component) ModifyCounters', () => {
         { type: 'SHORT_PAUSE', duration: 5, issues: [] },
         { type: 'LONG_PAUSE', duration: 15, issues: [] }
       ],
+      sequence: [ 'WORK', 'SHORT_PAUSE', 'WORK', 'LONG_PAUSE' ],
       ...bindActionCreators({
         launch: (_spies.launch = sinon.spy()),
-        changeDuration: (_spies.changeDuration = sinon.spy())
+        changeDuration: (_spies.changeDuration = sinon.spy()),
+        changeSequence: (_spies.changeSequence = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
     _wrapper = shallow(<ModifyCounters {..._props} />)
@@ -69,6 +72,14 @@ describe('(Component) ModifyCounters', () => {
 
       _spies.dispatch.should.have.been.called
       _spies.launch.should.have.been.called
+    })
+  })
+
+  describe('getActiveFromSequence', () => {
+    it('should return 1 or 2 based on the sequence', () => {
+      Object.keys(ALLOWED_SEQUENCES).forEach(key => {
+        getActiveFromSequence(ALLOWED_SEQUENCES[key]).should.equal(Number(key))
+      })
     })
   })
 })
