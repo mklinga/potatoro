@@ -1,9 +1,10 @@
 /* @flow */
 import React from 'react'
-import { Link } from 'react-router'
+import LaunchOrEdit from './LaunchOrEdit'
 
 type Props = {
-  running: boolean
+  running: boolean,
+  launch: () => Action
 }
 
 export const HomeView = (props: Props) => (
@@ -11,13 +12,13 @@ export const HomeView = (props: Props) => (
     <h2>Home View</h2>
     {props.running
       ? <span>Running</span>
-      : <span>Not running</span>}
-    <Link to='/edit'>Edit timers</Link>
+      : <LaunchOrEdit launch={props.launch} />}
   </div>
 )
 
 HomeView.propTypes = {
-  running: React.PropTypes.bool.isRequired
+  running: React.PropTypes.bool.isRequired,
+  launch: React.PropTypes.func.isRequired
 }
 
 export default HomeView

@@ -1,13 +1,16 @@
 import React from 'react'
 import { HomeView } from 'routes/Home/components/HomeView'
+import LaunchOrEdit from 'routes/Home/components/LaunchOrEdit'
 import { shallow } from 'enzyme'
 
 describe('(Component) Home', () => {
-  let _props, _wrapper
+  let _props, _spies, _wrapper
 
   beforeEach(() => {
+    _spies = {}
     _props = {
-      running: true
+      running: true,
+      launch: (_spies.launch = sinon.spy())
     }
     _wrapper = shallow(<HomeView {..._props} />)
   })
@@ -24,9 +27,9 @@ describe('(Component) Home', () => {
     _wrapper.find('span').text().should.match(/^Running$/)
   })
 
-  it('Should render text "Not running" when props.running is false', () => {
+  it('Should render LauncOrEdit when props.running is false', () => {
     _props.running = false
     _wrapper = shallow(<HomeView {..._props} />)
-    _wrapper.find('span').text().should.match(/^Not running$/)
+    _wrapper.find(LaunchOrEdit).should.exist
   })
 })
