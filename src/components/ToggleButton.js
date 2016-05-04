@@ -3,7 +3,8 @@ import React from 'react'
 
 type Props = {
   active: number | string,
-  onChange: Function
+  onChange: Function,
+  children: Object
 }
 
 export const ToggleButton = (props: Props) => (

@@ -9,7 +9,7 @@ import { launch } from '../modules/home'
 import { changeDuration } from '../modules/timers'
 import { changeSequence } from '../modules/sequence'
 
-const mapStateToProps = (state: { timers: Array<Timer> }) => ({
+const mapStateToProps = (state: { timers: Array<Timer>, sequence: Array<TimerType> }) => ({
   sequence: state.sequence,
   timers: state.timers
 })

@@ -8,8 +8,8 @@ import type { TimerType } from '../interfaces/timer'
 export const CHANGE_SEQUENCE = 'CHANGE_SEQUENCE'
 
 export const ALLOWED_SEQUENCES = {
-  1: [ 'WORK', 'SHORT_PAUSE', 'WORK', 'LONG_PAUSE' ],
-  2: [ 'WORK', 'SHORT_PAUSE', 'WORK', 'SHORT_PAUSE', 'WORK', 'LONG_PAUSE' ]
+  '1': [ 'WORK', 'SHORT_PAUSE', 'WORK', 'LONG_PAUSE' ],
+  '2': [ 'WORK', 'SHORT_PAUSE', 'WORK', 'SHORT_PAUSE', 'WORK', 'LONG_PAUSE' ]
 }
 
 // ------------------------------------
