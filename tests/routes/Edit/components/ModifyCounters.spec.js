@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router'
 import { bindActionCreators } from 'redux'
-import { ModifyCounters, hasIssues, getActiveFromSequence } from 'routes/Home/components/ModifyCounters'
-import { ALLOWED_SEQUENCES } from 'routes/Home/modules/sequence'
+import { ModifyCounters, hasIssues, getActiveFromSequence } from 'routes/Edit/components/ModifyCounters'
+import { ALLOWED_SEQUENCES } from 'routes/Edit/modules/sequence'
 import { shallow } from 'enzyme'
 
 describe('(Component) ModifyCounters', () => {
@@ -45,33 +46,28 @@ describe('(Component) ModifyCounters', () => {
     })
   })
 
-  describe('Launch button', () => {
-    let _button
+  describe('Save link', () => {
+    let _link
 
     beforeEach(() => {
-      _button = _wrapper.find('button').filterWhere(a => a.text() === 'Launch!')
+      _link = _wrapper.find(Link)
     })
 
     it('is disabled if there are any issues', () => {
-      expect(_button.prop('disabled')).to.be.false
+      expect(_link.prop('disabled')).to.be.false
 
       _props.timers.forEach(timer => {
         let timersWithIssues = _props.timers
           .map(t => t.type === timer.type ? ({ ...t, issues: [{ msg: 'has issue' }] }) : t)
         _wrapper = shallow(<ModifyCounters {..._props} timers={timersWithIssues} />)
 
-        _button = _wrapper.find('button').filterWhere(a => a.text() === 'Launch!')
-        expect(_button.prop('disabled')).to.be.true
+        _link = _wrapper.find(Link)
+        expect(_link.prop('disabled')).to.be.true
       })
     })
 
-    it('Should dispatch a `launch` action when clicked', () => {
-      _spies.dispatch.should.have.not.been.called
-
-      _button.simulate('click')
-
-      _spies.dispatch.should.have.been.called
-      _spies.launch.should.have.been.called
+    it('Should have a path to "/"', () => {
+      _link.prop('to').should.equal('/')
     })
   })
 

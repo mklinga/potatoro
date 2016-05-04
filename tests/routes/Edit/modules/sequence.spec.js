@@ -3,7 +3,7 @@ import {
   ALLOWED_SEQUENCES,
   changeSequence,
   default as seqReducer
-} from 'routes/Home/modules/sequence'
+} from 'routes/Edit/modules/sequence'
 
 describe('(Redux Module) Sequence', () => {
   it('Should export a constant CHANGE_SEQUENCE.', () => {

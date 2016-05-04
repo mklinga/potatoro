@@ -14,35 +14,12 @@
  * }
  */
 
-import { injectReducer } from '../../store/reducers'
-
 export default (store: Object) => ({
   getComponent (nextState: Object, next: Function) {
     require.ensure([
-      './containers/HomeViewContainer',
-      './modules/home',
-      './modules/timers',
-      './modules/sequence'
+      './containers/HomeViewContainer'
     ], (require) => {
       const HomeView = require('./containers/HomeViewContainer').default
-      const homeReducer = require('./modules/home').default
-      const timerReducer = require('./modules/timers').default
-      const seqReducer = require('./modules/sequence').default
-
-      injectReducer(store, {
-        key: 'running',
-        reducer: homeReducer
-      })
-
-      injectReducer(store, {
-        key: 'timers',
-        reducer: timerReducer
-      })
-
-      injectReducer(store, {
-        key: 'sequence',
-        reducer: seqReducer
-      })
 
       next(null, HomeView)
     })

@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react'
+import { Link } from 'react-router'
 
 import type { Timer, TimerType } from '../interfaces/timer'
 
@@ -37,7 +38,7 @@ export const ModifyCounters = (props: Props) => (
         <button value={2}>Two</button>
       </ToggleButton>
     </div>
-    <button className={styles.launchButton} disabled={hasIssues(props.timers)} onClick={props.launch}>Launch!</button>
+    <Link to='/' disabled={hasIssues(props.timers)}>Save</Link>
   </div>
 )
 

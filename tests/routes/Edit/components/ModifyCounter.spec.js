@@ -1,6 +1,6 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { ModifyCounter, _changeDuration, labels } from 'routes/Home/components/ModifyCounter'
+import { ModifyCounter, _changeDuration, labels } from 'routes/Edit/components/ModifyCounter'
 import { shallow } from 'enzyme'
 
 describe('(Component) ModifyCounter', () => {

@@ -2,8 +2,6 @@ import React from 'react'
 import { HomeView } from 'routes/Home/components/HomeView'
 import { shallow } from 'enzyme'
 
-import ModifyCountersContainer from 'routes/Home/containers/ModifyCountersContainer'
-
 describe('(Component) Home', () => {
   let _props, _wrapper
 
@@ -24,11 +22,5 @@ describe('(Component) Home', () => {
 
   it('Should render text "running" when props.running is true', () => {
     expect(_wrapper.find('span').text()).to.match(/^Running$/)
-  })
-
-  it('Should render ModifyCountersContainer when props.running is false', () => {
-    _props.running = false
-    _wrapper = shallow(<HomeView {..._props} />)
-    expect(_wrapper.find(ModifyCountersContainer)).to.exist
   })
 })

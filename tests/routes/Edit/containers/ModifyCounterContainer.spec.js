@@ -1,9 +1,9 @@
 import React from 'react'
 import { createStore, combineReducers } from 'redux'
 
-import ModifyCountersContainer from 'routes/Home/containers/ModifyCountersContainer'
-import seqReducer from 'routes/Home/modules/sequence'
-import timersReducer from 'routes/Home/modules/timers'
+import ModifyCountersContainer from 'routes/Edit/containers/ModifyCountersContainer'
+import seqReducer from 'routes/Edit/modules/sequence'
+import timersReducer from 'routes/Edit/modules/timers'
 import { shallow } from 'enzyme'
 
 describe('(Container) ModifyCounterContainer', () => {

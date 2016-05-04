@@ -3,7 +3,7 @@ import {
   durationOrIssues,
   changeDuration,
   default as timersReducer
-} from 'routes/Home/modules/timers'
+} from 'routes/Edit/modules/timers'
 
 const _setTimerDuration = (timers, type, duration) =>
   timers.map(timer => timer.type === type ? ({ ...timer, duration }) : timer)

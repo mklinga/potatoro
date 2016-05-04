@@ -2,6 +2,8 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
 
+import Edit from './Edit'
+
 export const createRoutes = (store) => {
 /*  Note: Instead of using JSX, we are using react-router PlainRoute,
     a simple javascript object to provide route definitions.
@@ -10,7 +12,10 @@ export const createRoutes = (store) => {
   const routes = {
     path: '/',
     component: CoreLayout,
-    indexRoute: Home(store)
+    indexRoute: Home(store),
+    childRoutes: [
+      Edit(store)
+    ]
   }
 
   return routes
