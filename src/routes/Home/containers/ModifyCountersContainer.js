@@ -7,6 +7,7 @@ import type { Timer, TimerType } from '../interfaces/timer'
 
 import { launch } from '../modules/home'
 import { changeDuration } from '../modules/timers'
+import { changeSequence } from '../modules/sequence'
 
 const mapStateToProps = (state: { timers: Array<Timer> }) => ({
   timers: state.timers
@@ -14,11 +15,13 @@ const mapStateToProps = (state: { timers: Array<Timer> }) => ({
 
 type ActionCreators = {
   changeDuration: (type: TimerType, duration: string) => Action,
+  changeSequence: (amountOfshortBreaks: number) => Action,
   launch: () => Action
 }
 
 const mapActionCreators: ActionCreators = {
   changeDuration,
+  changeSequence,
   launch
 }
 

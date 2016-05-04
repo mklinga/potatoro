@@ -1,0 +1,14 @@
+button {
+  background: $button-background;
+  border: 1px solid $border-color;
+  color: $button-color;
+  padding: 1rem;
+
+  &.active,
+  &:hover:not(:disabled) {
+    color: $button-active-color;
+    background-color: $button-active-background;
+  }
+  &:disabled { color: $button-disabled-color; }
+
+}
