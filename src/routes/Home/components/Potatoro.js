@@ -1,32 +1,36 @@
 /* @flow */
 import React from 'react'
-import BigTimer from './BigTimer'
+
+import BigTimerContainer from '../containers/BigTimer'
 import SequenceView from './SequenceView'
-import ActionButtons from './ActionButtons'
+import ActionButtonsContainer from '../containers/ActionButtons'
 
 export class Potatoro extends React.Component {
   timerId: number;
 
   componentDidMount () {
-    // this.timerId = window.setInterval(() => console.log(Date.now()), 2500)
+    this.timerId = this.props.startTimer()
   }
 
   componentWillUnmount () {
-    // window.clearInterval(this.timerId)
+    this.props.stopTimer(this.timerId)
   }
 
   render () {
     return (
       <div>
         <h2>Home View</h2>
-        <BigTimer />
+        <BigTimerContainer />
         <SequenceView />
-        <ActionButtons />
+        <ActionButtonsContainer />
       </div>
     )
   }
 }
 
-Potatoro.propTypes = {}
+Potatoro.propTypes = {
+  startTimer: React.PropTypes.func.isRequired,
+  stopTimer: React.PropTypes.func.isRequired
+}
 
 export default Potatoro
