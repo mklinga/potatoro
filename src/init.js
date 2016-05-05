@@ -3,7 +3,7 @@ export default ({
   elapsed: 0,
   running: false,
   timers: [
-    { type: 'WORK', duration: 3, issues: [] },
+    { type: 'WORK', duration: 30, issues: [] },
     { type: 'SHORT_PAUSE', duration: 5, issues: [] },
     { type: 'LONG_PAUSE', duration: 15, issues: [] }
   ],

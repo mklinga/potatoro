@@ -9,21 +9,23 @@ export const RESET_TIMER = 'RESET_TIMER'
 export const START_TIMER = 'START_TIMER'
 export const STOP_TIMER = 'STOP_TIMER'
 
-const _tick = (dispatch, getState) => {
+export const findTimerByType = state => timer => timer.type === state.sequence[state.current]
+
+const _tick = (tickLength: number) => (dispatch, getState) => {
   return window.setInterval(() => {
     const state = getState()
     if (state.running) {
       dispatch(modifyTimer())
     }
 
-    const currentTimer = state.timers.find(timer => timer.type === state.sequence[state.current])
+    const currentTimer = state.timers.find(findTimerByType(state))
 
     if (currentTimer && (state.elapsed >= (currentTimer.duration * 60))) {
       dispatch(stop())
       dispatch(resetTimer())
       dispatch(setCurrent((state.current + 1) % state.sequence.length))
     }
-  }, 1000)
+  }, tickLength)
 }
 
 export function resetTimer (value: number = 0): Action {
@@ -33,8 +35,8 @@ export function resetTimer (value: number = 0): Action {
   }
 }
 
-export function startTimer (): (dispatch: Function, getState: Function) => number {
-  return _tick
+export function startTimer (tickLength: number = 1000): (dispatch: Function, getState: Function) => number {
+  return _tick(tickLength)
 }
 
 export function modifyTimer (): Action {

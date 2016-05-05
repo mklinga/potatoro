@@ -8,9 +8,4 @@ const mapActionCreators = {
   stopTimer
 }
 
-const mapStateToProps = (state) => ({
-  current: state.current,
-  timers: state.timers
-})
-
-export default connect(mapStateToProps, mapActionCreators)(Potatoro)
+export default connect(undefined, mapActionCreators)(Potatoro)
