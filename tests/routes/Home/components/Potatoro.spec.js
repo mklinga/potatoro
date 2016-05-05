@@ -3,15 +3,10 @@ import { Potatoro } from 'routes/Home/components/Potatoro'
 import { shallow } from 'enzyme'
 
 describe('(Component) Potatoro', () => {
-  let _props, _spies, _wrapper
+  let _wrapper
 
   beforeEach(() => {
-    _spies = {}
-    _props = {
-      running: true,
-      launch: (_spies.launch = sinon.spy())
-    }
-    _wrapper = shallow(<Potatoro {..._props} />)
+    _wrapper = shallow(<Potatoro />)
   })
 
   it('Should render as a <div>.', () => {

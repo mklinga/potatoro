@@ -4,23 +4,29 @@ import BigTimer from './BigTimer'
 import SequenceView from './SequenceView'
 import ActionButtons from './ActionButtons'
 
-type Props = {
-  running: boolean,
-  launch: () => Action
+export class Potatoro extends React.Component {
+  timerId: number;
+
+  componentDidMount () {
+    // this.timerId = window.setInterval(() => console.log(Date.now()), 2500)
+  }
+
+  componentWillUnmount () {
+    // window.clearInterval(this.timerId)
+  }
+
+  render () {
+    return (
+      <div>
+        <h2>Home View</h2>
+        <BigTimer />
+        <SequenceView />
+        <ActionButtons />
+      </div>
+    )
+  }
 }
 
-export const Potatoro = (props: Props) => (
-  <div>
-    <h2>Home View</h2>
-    <BigTimer />
-    <SequenceView />
-    <ActionButtons launch={props.launch} />
-  </div>
-)
-
-Potatoro.propTypes = {
-  running: React.PropTypes.bool.isRequired,
-  launch: React.PropTypes.func.isRequired
-}
+Potatoro.propTypes = {}
 
 export default Potatoro
