@@ -1,5 +1,5 @@
 import HomeRoute from 'routes/Home'
-import HomeView from 'routes/Home/containers/HomeViewContainer'
+import Potatoro from 'routes/Home/containers/PotatoroContainer'
 import { createStore } from 'redux'
 
 describe('(Route) Home', () => {
@@ -17,11 +17,11 @@ describe('(Route) Home', () => {
   })
 
   describe('getComponent (Home)', () => {
-    it('Should call next() with HomeView', () => {
+    it('Should call next() with PotatoroContainer', () => {
       let _cb = sinon.spy()
       _route.getComponent({}, _cb)
 
-      _cb.should.have.been.calledWith(null, HomeView)
+      _cb.should.have.been.calledWith(null, Potatoro)
     })
   })
 })

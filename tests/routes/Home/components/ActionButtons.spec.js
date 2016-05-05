@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
-import LaunchOrEdit from 'routes/Home/components/LaunchOrEdit'
+import ActionButtons from 'routes/Home/components/ActionButtons'
 import { shallow } from 'enzyme'
 
-describe('(Component) LaunchOrEdit', () => {
+describe('(Component) ActionButtons', () => {
   let _props, _spies, _wrapper
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('(Component) LaunchOrEdit', () => {
     _props = {
       launch: (_spies.launch = sinon.spy())
     }
-    _wrapper = shallow(<LaunchOrEdit {..._props} />)
+    _wrapper = shallow(<ActionButtons {..._props} />)
   })
 
   it('Should render as a <div>.', () => {
@@ -26,7 +26,7 @@ describe('(Component) LaunchOrEdit', () => {
       _props = {
         launch: (_spies.launch = sinon.spy())
       }
-      _wrapper = shallow(<LaunchOrEdit {..._props} />)
+      _wrapper = shallow(<ActionButtons {..._props} />)
       _button = _wrapper.find('button')
     })
 
@@ -45,7 +45,7 @@ describe('(Component) LaunchOrEdit', () => {
       _props = {
         launch: (_spies.launch = sinon.spy())
       }
-      _wrapper = shallow(<LaunchOrEdit {..._props} />)
+      _wrapper = shallow(<ActionButtons {..._props} />)
       _link = _wrapper.find(Link)
     })
 
