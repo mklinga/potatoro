@@ -4,16 +4,19 @@ import { injectReducer } from '../../store/reducers'
 export default (store: Object) => ({
   getComponent (nextState: Object, next: Function) {
     require.ensure([
-      './modules/home',
+      './modules/current',
+      './modules/running',
       './modules/timerActions',
       './containers/Potatoro'
     ], (require) => {
-      const homeReducer = require('./modules/home').default
+      const currentReducer = require('./modules/current').default
+      const runningReducer = require('./modules/running').default
       const timerActionsReducer = require('./modules/timerActions').default
       const Potatoro = require('./containers/Potatoro').default
 
-      injectReducer(store, { key: 'running', reducer: homeReducer })
+      injectReducer(store, { key: 'current', reducer: currentReducer })
       injectReducer(store, { key: 'elapsed', reducer: timerActionsReducer })
+      injectReducer(store, { key: 'running', reducer: runningReducer })
 
       next(null, Potatoro)
     })

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import ActionButtons from '../components/ActionButtons'
 
-import { launch } from '../modules/home'
+import { launch } from '../modules/running'
 
 const mapActionCreators = {
   launch
