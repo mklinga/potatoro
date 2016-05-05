@@ -1,20 +1,26 @@
 /* @flow */
 import React from 'react'
-
 import BigTimer from './BigTimer'
+import SequenceView from './SequenceView'
+import ActionButtons from './ActionButtons'
 
 type Props = {
-  elapsed: number
+  running: boolean,
+  launch: () => Action
 }
 
 export const Potatoro = (props: Props) => (
   <div>
-    <BigTimer elapsed={props.elapsed} />
+    <h2>Home View</h2>
+    <BigTimer />
+    <SequenceView />
+    <ActionButtons launch={props.launch} />
   </div>
 )
 
 Potatoro.propTypes = {
-  elapsed: React.PropTypes.number.isRequired
+  running: React.PropTypes.bool.isRequired,
+  launch: React.PropTypes.func.isRequired
 }
 
 export default Potatoro

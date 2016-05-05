@@ -6,7 +6,8 @@ import Potatoro from '../components/Potatoro'
 import { launch } from '../modules/home'
 
 const mapStateToProps = (state: Object) => ({
-  elapsed: state.elapsed || 0
+  elapsed: state.elapsed,
+  running: state.running
 })
 
 const mapActionCreators = {
@@ -17,11 +18,11 @@ class PotatoroContainer extends React.Component {
   timerId: number;
 
   componentDidMount () {
-    this.timerId = window.setInterval(() => console.log(Date.now()), 2500)
+    // this.timerId = window.setInterval(() => console.log(Date.now()), 2500)
   }
 
   componentWillUnmount () {
-    window.clearInterval(this.timerId)
+    // window.clearInterval(this.timerId)
   }
   render () {
     return <Potatoro {...this.props} />
