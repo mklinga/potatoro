@@ -1,5 +1,5 @@
 import HomeRoute from 'routes/Home'
-import Potatoro from 'routes/Home/components/Potatoro'
+import Potatoro from 'routes/Home/containers/Potatoro'
 import { createStore } from 'redux'
 
 describe('(Route) Home', () => {

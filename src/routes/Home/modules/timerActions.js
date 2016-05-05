@@ -11,7 +11,7 @@ export function modifyTimer (): Action {
   }
 }
 
-export function startTimer (): Action {
+export function startTimer (): (dispatch: Function, getState: Function) => number {
   return (dispatch, getState) => {
     return window.setInterval(() => {
       if (getState().running) {
@@ -21,7 +21,7 @@ export function startTimer (): Action {
   }
 }
 
-export function stopTimer (timerId: number): void {
+export function stopTimer (timerId: number): () => void {
   return () => window.clearInterval(timerId)
 }
 
