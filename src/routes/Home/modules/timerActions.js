@@ -26,8 +26,7 @@ export function stopTimer (timerId: number): () => void {
 }
 
 const ACTION_HANDLERS = {
-  [MODIFY_TIMER]: (state: number, action: { payload: number }): number => state + action.payload,
-  [STOP_TIMER]: (state: number): number => state
+  [MODIFY_TIMER]: (state: number, action: { payload: number }): number => state + action.payload
 }
 
 // ------------------------------------
