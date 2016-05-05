@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react'
 import LaunchOrEdit from './LaunchOrEdit'
+import PotatoroContainer from '../containers/PotatoroContainer'
 
 type Props = {
   running: boolean,
@@ -11,7 +12,7 @@ export const HomeView = (props: Props) => (
   <div>
     <h2>Home View</h2>
     {props.running
-      ? <span>Running</span>
+      ? <PotatoroContainer />
       : <LaunchOrEdit launch={props.launch} />}
   </div>
 )

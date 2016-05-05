@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import styles from './HomeView.scss'
+import styles from './LaunchOrEdit.scss'
 
 export const LaunchOrEdit = (props: { launch: () => Action }) => (
   <div>
-    <button className={styles.launchButton} onClick={props.launch}>Launch</button>
+    <button className={styles.launchButton} onClick={props.launch}>Launch!</button>
     <Link to='/edit'>Edit timers</Link>
   </div>
 )

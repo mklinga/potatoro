@@ -1,5 +1,6 @@
 import React from 'react'
 import { HomeView } from 'routes/Home/components/HomeView'
+import PotatoroContainer from 'routes/Home/containers/PotatoroContainer'
 import LaunchOrEdit from 'routes/Home/components/LaunchOrEdit'
 import { shallow } from 'enzyme'
 
@@ -24,7 +25,7 @@ describe('(Component) Home', () => {
   })
 
   it('Should render text "running" when props.running is true', () => {
-    _wrapper.find('span').text().should.match(/^Running$/)
+    _wrapper.find(PotatoroContainer).should.exist
   })
 
   it('Should render LauncOrEdit when props.running is false', () => {
