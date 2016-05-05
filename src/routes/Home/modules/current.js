@@ -1,4 +1,5 @@
 /* @flow */
+import init from '../../../init'
 
 // ------------------------------------
 // Constants
@@ -28,8 +29,7 @@ const ACTION_HANDLERS = {
 // Reducers
 // ------------------------------------
 
-const initialState: number = 0
-export default function reducer (state: number = initialState, action: Action): number {
+export default function reducer (state: number = init.current, action: Action): number {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

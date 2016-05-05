@@ -1,6 +1,7 @@
 /* @flow */
 
 import type { TimerType } from '../interfaces/timer'
+import init from '../../../init'
 
 // ------------------------------------
 // Constants
@@ -40,10 +41,7 @@ const ACTION_HANDLERS = {
 // Reducers
 // ------------------------------------
 
-// Initialstate is based on two short pauses
-const initialState: Array<TimerType> = ALLOWED_SEQUENCES[2]
-
-export default function reducer (state: Array<TimerType> = initialState, action: Action): Array<TimerType> {
+export default function reducer (state: Array<TimerType> = init.sequence, action: Action): Array<TimerType> {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

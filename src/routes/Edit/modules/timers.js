@@ -2,7 +2,7 @@
 
 import type { Issue, TimerType, Timer } from '../interfaces/timer'
 import constants from '../constants'
-import init from 'init.js'
+import init from '../../../init.js'
 
 // ------------------------------------
 // Validation
@@ -56,11 +56,8 @@ const ACTION_HANDLERS = {
 // Reducers
 // ------------------------------------
 
-const initialState: Array<Timer> = init.timers
-
-export default function reducer (state: Array<Timer> = initialState, action: Action): Array<Timer> {
+export default function reducer (state: Array<Timer> = init.timers, action: Action): Array<Timer> {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
 }
-

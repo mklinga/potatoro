@@ -2,6 +2,8 @@
 import { setCurrent } from './current'
 import { stop } from './running'
 
+import init from '../../../init'
+
 export const MODIFY_TIMER = 'MODIFY_TIMER'
 export const RESET_TIMER = 'RESET_TIMER'
 export const START_TIMER = 'START_TIMER'
@@ -55,8 +57,7 @@ const ACTION_HANDLERS = {
 // Reducers
 // ------------------------------------
 
-const initialState: number = 0
-export default function reducer (state: number = initialState, action: Action): number {
+export default function reducer (state: number = init.elapsed, action: Action): number {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
