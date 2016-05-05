@@ -9,7 +9,7 @@ export const RESET_TIMER = 'RESET_TIMER'
 export const START_TIMER = 'START_TIMER'
 export const STOP_TIMER = 'STOP_TIMER'
 
-export const findTimerByType = state => timer => timer.type === state.sequence[state.current]
+export const findTimerByType = (state: Object) => (timer: Object) => timer.type === state.sequence[state.current]
 
 const _tick = (tickLength: number) => (dispatch, getState) => {
   return window.setInterval(() => {
