@@ -10,15 +10,15 @@ type Props = {
 
 export const SequenceView = (props: Props) => (
   <div>
-    <p>
+    <div>
       <h4>Current</h4>
       <span>{props.sequence[props.current]}</span>
-    </p>
+    </div>
 
-    <p>
+    <div>
       <h4>Next</h4>
       <span>{props.sequence[(props.current + 1) % props.sequence.length]}</span>
-    </p>
+    </div>
   </div>
 )
 

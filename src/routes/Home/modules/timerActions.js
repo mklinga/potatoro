@@ -4,12 +4,24 @@ import { stop } from './running'
 
 import init from '../../../init'
 
+import { showNotification } from 'utils/notifications'
+
 export const MODIFY_TIMER = 'MODIFY_TIMER'
 export const RESET_TIMER = 'RESET_TIMER'
 export const START_TIMER = 'START_TIMER'
 export const STOP_TIMER = 'STOP_TIMER'
 
 export const findTimerByType = (state: Object) => (timer: Object) => timer.type === state.sequence[state.current]
+
+const _timerFinished = (dispatch, state) => {
+  dispatch(stop())
+  dispatch(resetTimer())
+
+  const nextTimer = (state.current + 1) % state.sequence.length
+  dispatch(setCurrent(nextTimer))
+
+  showNotification('Potatoro', { body: 'Time\'s up!' })
+}
 
 const _tick = (tickLength: number) => (dispatch, getState) => {
   return window.setInterval(() => {
@@ -20,10 +32,12 @@ const _tick = (tickLength: number) => (dispatch, getState) => {
 
       const currentTimer = state.timers.find(findTimerByType(state))
 
-      if (currentTimer && (state.elapsed >= (currentTimer.duration * 60))) {
-        dispatch(stop())
-        dispatch(resetTimer())
-        dispatch(setCurrent((state.current + 1) % state.sequence.length))
+      if (currentTimer) {
+        const durationInSeconds = currentTimer.duration * 60
+
+        if ((state.elapsed >= durationInSeconds)) {
+          _timerFinished(dispatch, state)
+        }
       }
     }
   }, tickLength)

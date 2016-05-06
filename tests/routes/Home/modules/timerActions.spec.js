@@ -115,17 +115,22 @@ describe('(Redux Module) Home/TimerActions', () => {
     })
 
     describe('(Clause) Timer has finished', function () {
-      const _cb = sinon.spy()
-      const _getState = () => ({
-        running: true,
-        elapsed: 1,
-        current: 0,
-        sequence: [ 'WORK', 'SHORT_PAUSE' ],
-        timers: { find: () => {
-          return { duration: 0 }
-        }}
+
+      let _cb, _getState, _timer
+
+      beforeEach(() => {
+        _cb = sinon.spy()
+        _getState = () => ({
+          running: true,
+          elapsed: 1,
+          current: 0,
+          sequence: [ 'WORK', 'SHORT_PAUSE' ],
+          timers: { find: () => {
+            return { duration: 0 }
+          }}
+        })
+        _timer = startTimer(10)(_cb, _getState)
       })
-      const _timer = startTimer(10)(_cb, _getState)
 
       it('Should dispatch stop()', () => {
         return new Promise((resolve, reject) => {
@@ -141,7 +146,7 @@ describe('(Redux Module) Home/TimerActions', () => {
           return window.setTimeout(() => {
             _cb.should.have.been.calledWith({ type: 'RESET_TIMER', payload: 0 })
             resolve()
-          }, 1)
+          }, 100)
         })
       })
 
@@ -150,7 +155,30 @@ describe('(Redux Module) Home/TimerActions', () => {
           return window.setTimeout(() => {
             _cb.should.have.been.calledWith({ type: 'SET_CURRENT_TIMER', payload: 1 })
             resolve()
-          }, 1)
+          }, 100)
+        })
+      })
+
+      it('Should not dispatch other than MODIFY_TIMER if state.elapsed is smaller than duration', function () {
+        _cb = sinon.spy()
+        _getState = () => ({
+          running: true,
+          elapsed: 1,
+          current: 0,
+          sequence: [ 'WORK', 'SHORT_PAUSE' ],
+          timers: { find: () => {
+            return { duration: 60 }
+          }}
+        })
+        _timer = startTimer(10)(_cb, _getState)
+
+        return new Promise((resolve, reject) => {
+          return window.setTimeout(() => {
+            _cb.should.not.have.been.calledWith({ type: 'STOP_POTATORO' })
+            _cb.should.not.have.been.calledWith({ type: 'RESET_TIMER', payload: 0 })
+            _cb.should.not.have.been.calledWith({ type: 'SET_CURRENT_TIMER', payload: 1 })
+            resolve()
+          }, 100)
         })
       })
     })

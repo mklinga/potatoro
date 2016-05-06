@@ -5,12 +5,17 @@ import { Router, useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store/createStore'
 import { Provider } from 'react-redux'
+import { getNotificationPermission } from 'utils/notifications'
 
 const MOUNT_ELEMENT = document.getElementById('root')
 
 // Configure history for react-router
 const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: __BASENAME__
+})
+
+getNotificationPermission().then(permission => {
+  console.log(permission)
 })
 
 // Create redux store and sync with react-router-redux. We have installed the
