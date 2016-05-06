@@ -14,16 +14,17 @@ export const findTimerByType = (state: Object) => (timer: Object) => timer.type 
 const _tick = (tickLength: number) => (dispatch, getState) => {
   return window.setInterval(() => {
     const state = getState()
+
     if (state.running) {
       dispatch(modifyTimer())
-    }
 
-    const currentTimer = state.timers.find(findTimerByType(state))
+      const currentTimer = state.timers.find(findTimerByType(state))
 
-    if (currentTimer && (state.elapsed >= (currentTimer.duration * 60))) {
-      dispatch(stop())
-      dispatch(resetTimer())
-      dispatch(setCurrent((state.current + 1) % state.sequence.length))
+      if (currentTimer && (state.elapsed >= (currentTimer.duration * 60))) {
+        dispatch(stop())
+        dispatch(resetTimer())
+        dispatch(setCurrent((state.current + 1) % state.sequence.length))
+      }
     }
   }, tickLength)
 }

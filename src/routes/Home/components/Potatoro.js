@@ -2,7 +2,7 @@
 import React from 'react'
 
 import BigTimerContainer from '../containers/BigTimer'
-import SequenceView from './SequenceView'
+import SequenceViewContainer from '../containers/SequenceView'
 import ActionButtonsContainer from '../containers/ActionButtons'
 
 export class Potatoro extends React.Component {
@@ -21,7 +21,7 @@ export class Potatoro extends React.Component {
       <div>
         <h2>Home View</h2>
         <BigTimerContainer />
-        <SequenceView />
+        <SequenceViewContainer />
         <ActionButtonsContainer />
       </div>
     )

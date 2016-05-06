@@ -7,7 +7,13 @@ import { Potatoro } from 'routes/Home/components/Potatoro'
 import { mount } from 'enzyme'
 
 describe('(Component) Potatoro', () => {
-  let _store = createStore(combineReducers({ elapsed: timerActionsReducer }), { elapsed: 0 })
+  const _initialState = {
+    elapsed: 0,
+    current: 0,
+    sequence: [ 'WORK', 'SHORT_PAUSE' ]
+  }
+
+  let _store = createStore(combineReducers({ elapsed: timerActionsReducer }), _initialState)
   let _wrapper, _spies
 
   beforeEach(() => {
