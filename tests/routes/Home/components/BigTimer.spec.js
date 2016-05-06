@@ -8,7 +8,7 @@ describe('(Component) BigTimer', () => {
 
   beforeEach(() => {
     _props = {
-      running: true,
+      disabled: false,
       time: '12:22'
     }
     _wrapper = shallow(<BigTimer {..._props} />)

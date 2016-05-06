@@ -22,8 +22,8 @@ describe('(Container) BigTimer', () => {
   })
 
   it('Should set needed properties', () => {
-    _wrapper.props().should.have.property('time')
-    _wrapper.props().should.have.property('running')
+    _wrapper.props().should.have.property('time', '28:20')
+    _wrapper.props().should.have.property('disabled', false)
   })
 
   describe('_countTimeLeft', () => {
