@@ -14,9 +14,7 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: __BASENAME__
 })
 
-getNotificationPermission().then(permission => {
-  console.log(permission)
-})
+getNotificationPermission()
 
 // Create redux store and sync with react-router-redux. We have installed the
 // react-router-redux reducer under the key "router" in src/routes/index.js,

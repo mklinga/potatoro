@@ -3,10 +3,17 @@ import { connect } from 'react-redux'
 
 import ActionButtons from '../components/ActionButtons'
 
-import { launch } from '../modules/running'
+import { launch, stop } from '../modules/running'
 
 const mapActionCreators = {
-  launch
+  launch,
+  stop
 }
 
-export default connect(undefined, mapActionCreators)(ActionButtons)
+const mapStateToProps = (state) => {
+  return {
+    running: state.running
+  }
+}
+
+export default connect(mapStateToProps, mapActionCreators)(ActionButtons)

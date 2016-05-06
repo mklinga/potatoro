@@ -9,7 +9,9 @@ describe('(Component) ActionButtons', () => {
   beforeEach(() => {
     _spies = {}
     _props = {
-      launch: (_spies.launch = sinon.spy())
+      running: false,
+      launch: (_spies.launch = sinon.spy()),
+      stop: (_spies.stop = sinon.spy())
     }
     _wrapper = shallow(<ActionButtons {..._props} />)
   })
@@ -24,16 +26,27 @@ describe('(Component) ActionButtons', () => {
     beforeEach(() => {
       _spies = {}
       _props = {
-        launch: (_spies.launch = sinon.spy())
+        running: false,
+        launch: (_spies.launch = sinon.spy()),
+        stop: (_spies.stop = sinon.spy())
       }
       _wrapper = shallow(<ActionButtons {..._props} />)
       _button = _wrapper.find('button')
     })
 
-    it('Should render with an <button> that triggers launch() action', () => {
+    it('Should render with an <button> that triggers launch() action when not running', () => {
       _button.should.exist
       _button.simulate('click')
       _spies.launch.should.have.been.called
+    })
+
+    it('Should render with an <button> that triggers stop() action when running', () => {
+      _props.running = true
+      _wrapper = shallow(<ActionButtons {..._props} />)
+      _button = _wrapper.find('button')
+
+      _button.simulate('click')
+      _spies.stop.should.have.been.called
     })
   })
 
@@ -43,7 +56,9 @@ describe('(Component) ActionButtons', () => {
     beforeEach(() => {
       _spies = {}
       _props = {
-        launch: (_spies.launch = sinon.spy())
+        running: false,
+        launch: (_spies.launch = sinon.spy()),
+        stop: (_spies.stop = sinon.spy())
       }
       _wrapper = shallow(<ActionButtons {..._props} />)
       _link = _wrapper.find(Link)

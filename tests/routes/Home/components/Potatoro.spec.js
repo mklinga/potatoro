@@ -13,7 +13,12 @@ describe('(Component) Potatoro', () => {
     sequence: [ 'WORK', 'SHORT_PAUSE' ]
   }
 
-  let _store = createStore(combineReducers({ elapsed: timerActionsReducer }), _initialState)
+  let _store = createStore(combineReducers({
+      elapsed: timerActionsReducer,
+      current: state => state || 0,
+      sequence: state => state || [ 'WORK', 'SHORT_PAUSE' ]
+    }), _initialState)
+
   let _wrapper, _spies
 
   beforeEach(() => {
