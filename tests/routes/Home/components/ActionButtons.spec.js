@@ -68,5 +68,12 @@ describe('(Component) ActionButtons', () => {
       _link.should.exist
       _link.prop('to').should.equal('/edit')
     })
+
+    it('Should not exist while running', () => {
+      _props.running = true
+      _wrapper = shallow(<ActionButtons {..._props} />)
+      _link = _wrapper.find(Link)
+      expect(_link).to.not.exist
+    })
   })
 })

@@ -16,7 +16,7 @@ export const ActionButtons = (props: Props) => (
       ? <button className={styles.launchButton} onClick={props.stop}>Pause</button>
       : <button className={styles.launchButton} onClick={props.launch}>Launch!</button>
     }
-    <Link to='/edit'>Edit timers</Link>
+    {!props.running && <Link to='/edit'>Edit timers</Link>}
   </div>
 )
 
