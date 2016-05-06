@@ -8,10 +8,10 @@ type Props = {
   seconds: number
 }
 
-export const padLeft = sec => sec < 10 ? `0${sec}` : sec
+export const _padLeft = sec => sec < 10 ? `0${sec}` : sec
 
 export const _formatTimer = (seconds: number) => {
-  return `${Math.floor(seconds / 60)}:${padLeft(seconds % 60)}`
+  return `${Math.floor(seconds / 60)}:${_padLeft(seconds % 60)}`
 }
 
 export const BigTimer = (props: Props) => (

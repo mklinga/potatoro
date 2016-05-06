@@ -15,6 +15,8 @@ describe('(Component) Potatoro', () => {
 
   let _store = createStore(combineReducers({
       elapsed: timerActionsReducer,
+      running: state => state || false,
+      timers: state => state || [ { type: 'WORK', duration: 30 }, { type: 'SHORT_PAUSE', duration: 5 } ],
       current: state => state || 0,
       sequence: state => state || [ 'WORK', 'SHORT_PAUSE' ]
     }), _initialState)

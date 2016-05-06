@@ -10,7 +10,7 @@ type State = {
   timers: Array<{ type: string}>
 }
 
-const _countTimeLeft = (state: State) => {
+export const _countTimeLeft = (state: State) => {
   const currentTimer = state.timers.find(timer => timer.type === state.sequence[state.current])
   return (currentTimer.duration * 60) - state.elapsed
 }
