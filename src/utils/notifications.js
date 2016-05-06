@@ -1,8 +1,8 @@
 /* @flow */
 export const getNotificationPermission = (): Promise => {
-  return Notification.requestPermission()
+  return window.Notification.requestPermission()
 }
 
 export const showNotification = (title: string, options: { body: string }): Object => {
-  return new Notification(title, options)
+  return new window.Notification(title, options)
 }

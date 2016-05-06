@@ -1,13 +1,16 @@
 /*
-Application Colors
+  Application Colors
 */
 
-$border-color: #999;
+$color: #363942;
+$color-disabled: #999;
+
+$border-color: $color-disabled;
 
 $button-background: white;
-$button-color: #363942;
+$button-color: $color;
 
 $button-active-background: #d8caa8;
-$button-active-color: #363942;
+$button-active-color: $color;
 
-$button-disabled-color: #999;
+$button-disabled-color: $color-disabled;
