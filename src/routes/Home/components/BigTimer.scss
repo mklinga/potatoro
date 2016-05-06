@@ -1,9 +1,11 @@
+@import '../../../styles/variables/colors';
+
 .bigTimer {
   span {
     font-size: 20rem;
   }
 }
 
-.paused {
-  color: #999
+.disabled {
+  color: $color-disabled;
 }

@@ -15,9 +15,15 @@ export const _countTimeLeft = (state: State) => {
   return (currentTimer.duration * 60) - state.elapsed
 }
 
+export const _padLeft = (sec: number) => sec < 10 ? `0${sec}` : sec
+
+export const _formatTimer = (seconds: number) => {
+  return `${Math.floor(seconds / 60)}:${_padLeft(seconds % 60)}`
+}
+
 const mapStateToProps = (state) => ({
-  seconds: _countTimeLeft(state),
-  running: state.running
+  time: _formatTimer(_countTimeLeft(state)),
+  disabled: !state.running
 })
 
 export default connect(mapStateToProps)(BigTimer)

@@ -4,27 +4,21 @@ import React from 'react'
 import styles from './BigTimer.scss'
 
 type Props = {
-  running: boolean,
-  seconds: number
-}
-
-export const _padLeft = (sec: number) => sec < 10 ? `0${sec}` : sec
-
-export const _formatTimer = (seconds: number) => {
-  return `${Math.floor(seconds / 60)}:${_padLeft(seconds % 60)}`
+  disabled: boolean,
+  time: string
 }
 
 export const BigTimer = (props: Props) => (
   <div className={styles.bigTimer}>
-    <span className={props.running ? styles.running : styles.paused}>
-    {_formatTimer(props.seconds)}
+    <span className={props.disabled ? styles.disabled : undefined}>
+    {props.time}
     </span>
   </div>
 )
 
 BigTimer.propTypes = {
-  running: React.PropTypes.bool.isRequired,
-  seconds: React.PropTypes.number.isRequired
+  disabled: React.PropTypes.bool.isRequired,
+  time: React.PropTypes.string.isRequired
 }
 
 export default BigTimer
