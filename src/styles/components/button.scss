@@ -1,14 +1,20 @@
-button {
+button, a[role=button] {
   background: $button-background;
   border: 1px solid $border-color;
+  border-radius: 1rem;
   color: $button-color;
-  padding: 1rem;
+  display: inline-block;
+  outline: none;
+  padding: 1.5rem 3rem;
+  text-decoration: none;
 
   &.active,
   &:hover:not(:disabled) {
     color: $button-active-color;
-    background-color: $button-active-background;
+    background-color: $button-hover-background;
   }
+
   &:disabled { color: $button-disabled-color; }
 
+  &:focus { border-color: $button-hover-background; }
 }

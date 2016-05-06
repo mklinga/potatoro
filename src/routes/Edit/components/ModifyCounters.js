@@ -37,7 +37,9 @@ export const ModifyCounters = (props: Props) => (
         <button value={2}>Two</button>
       </ToggleButton>
     </div>
-    <Link to='/' disabled={hasIssues(props.timers)}>Save</Link>
+    <div className={styles.returnLink}>
+      <Link role='button' to='/' disabled={hasIssues(props.timers)}>Save</Link>
+    </div>
   </div>
 )
 

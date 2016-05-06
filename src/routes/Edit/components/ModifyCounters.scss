@@ -1,14 +1,25 @@
+@import '../../../styles/variables/colors';
+
 .modifyCounters { }
 
 .counters { margin: 2rem; }
 
 .breakAmounts{
 
+  button {
+    border-radius: 0;
+    border-color: black;
+
+    &:global(.active) {
+      background-color: $button-active-background;
+    }
+  }
+
   button:first-child {
     margin-right: -1px;
   }
 }
 
-.launchButton {
+.returnLink {
   margin: 2rem;
 }
