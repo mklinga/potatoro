@@ -38,10 +38,6 @@ describe('(Component) Potatoro', () => {
     _wrapper.find(Potatoro).should.exist
   })
 
-  it('Should render with an <h2> that includes Home View text.', () => {
-    _wrapper.find(Potatoro).find('h2').text().should.match(/Home View/)
-  })
-
   describe('Timer', () => {
     beforeEach(() => {
       _spies = {

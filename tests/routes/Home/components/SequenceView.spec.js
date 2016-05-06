@@ -8,8 +8,7 @@ describe('(Component) SequenceView', () => {
 
   beforeEach(() => {
     _props = {
-      current: 0,
-      sequence: [ 'WORK', 'SHORT_PAUSE' ]
+      current: 'WORK'
     }
     _wrapper = shallow(<SequenceView {..._props} />)
   })
@@ -22,41 +21,19 @@ describe('(Component) SequenceView', () => {
     let _current
 
     _props = {
-      current: 0,
-      sequence: [ 'WORK', 'SHORT_PAUSE' ]
+      current: 'WORK'
     }
     _wrapper = shallow(<SequenceView {..._props} />)
-    _current = _wrapper.find('h4').filterWhere(a => a.text() === 'Current').parent().find('span')
+    _current = _wrapper.find('span')
 
     it('Should show current action', () => {
       _current.should.exist
       _current.text().should.equal('WORK')
 
-      _props.current = 1
+      _props.current = 'SHORT_PAUSE'
       _wrapper = shallow(<SequenceView {..._props} />)
-      _current = _wrapper.find('h4').filterWhere(a => a.text() === 'Current').parent().find('span')
+      _current = _wrapper.find('span')
       _current.text().should.equal('SHORT_PAUSE')
-    })
-  })
-
-  describe('Next sequence', () => {
-    let _next
-
-    _props = {
-      current: 0,
-      sequence: [ 'WORK', 'SHORT_PAUSE' ]
-    }
-    _wrapper = shallow(<SequenceView {..._props} />)
-    _next = _wrapper.find('h4').filterWhere(a => a.text() === 'Next').parent().find('span')
-
-    it('Should show current action', () => {
-      _next.should.exist
-      _next.text().should.equal('SHORT_PAUSE')
-
-      _props.current = 1
-      _wrapper = shallow(<SequenceView {..._props} />)
-      _next = _wrapper.find('h4').filterWhere(a => a.text() === 'Next').parent().find('span')
-      _next.text().should.equal('WORK')
     })
   })
 })

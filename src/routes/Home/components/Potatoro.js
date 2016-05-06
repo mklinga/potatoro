@@ -19,7 +19,6 @@ export class Potatoro extends React.Component {
   render () {
     return (
       <div>
-        <h2>Home View</h2>
         <BigTimerContainer />
         <SequenceViewContainer />
         <ActionButtonsContainer />

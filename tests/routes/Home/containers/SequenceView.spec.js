@@ -15,6 +15,5 @@ describe('(Container) SequenceView', () => {
 
   it('Should set needed properties', () => {
     _wrapper.props().should.have.property('current')
-    _wrapper.props().should.have.property('sequence')
   })
 })
