@@ -7,7 +7,7 @@ type State = {
   elapsed: number,
   current: number,
   sequence: Array<string>,
-  timers: Array<{ type: string}>
+  timers: Array<{ type: string, duration: number, issues: Array<Object> }>
 }
 
 export const _countTimeLeft = (state: State) => {
