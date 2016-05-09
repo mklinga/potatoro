@@ -45,7 +45,7 @@ describe('(Container) BigTimer', () => {
 
     it('Should not pad numbers bigger than ten with a zero', () => {
       for (let i = 10; i <= 60; i++) {
-        padLeft(i).should.equal(i)
+        padLeft(i).should.equal(i.toString())
       }
     })
   })
