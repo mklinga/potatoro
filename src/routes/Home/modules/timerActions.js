@@ -1,5 +1,5 @@
 /* @flow */
-import { setCurrent } from './current'
+import { setCurrent, getNextTimerIndex } from './current'
 import { stop } from './running'
 import type { State, Timer } from 'types/timer'
 
@@ -18,8 +18,7 @@ const _timerFinished = (dispatch: Function, state: State) => {
   dispatch(stop())
   dispatch(resetTimer())
 
-  const nextTimer = (state.current + 1) % state.sequence.length
-  dispatch(setCurrent(nextTimer))
+  dispatch(setCurrent(getNextTimerIndex(state)))
 
   showNotification('Potatoro', { body: 'Time\'s up!' })
 }

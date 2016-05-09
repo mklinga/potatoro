@@ -7,10 +7,12 @@ import ActionButtons from '../components/ActionButtons'
 
 import { launch, stop } from '../modules/running'
 import { resetTimer } from '../modules/timerActions'
+import { setNextTimer } from '../modules/current'
 
 const mapActionCreators: ActionCreators.ActionButtons = {
   launch,
   reset: () => resetTimer(),
+  next: () => setNextTimer(),
   stop
 }
 

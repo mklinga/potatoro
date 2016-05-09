@@ -1,6 +1,8 @@
 import {
   SET_CURRENT_TIMER,
   setCurrent,
+  setNextTimer,
+  getNextTimerIndex,
   default as currentReducer
 } from 'routes/Home/modules/current'
 
@@ -42,6 +44,47 @@ describe('(Redux Module) Current', () => {
     it('Should assign arguments into "payload"', () => {
       expect(setCurrent(0)).to.have.property('payload', 0)
       expect(setCurrent(12)).to.have.property('payload', 12)
+    })
+  })
+
+  describe('(Action Spawner) setNextTimer', () => {
+    it('Should return a function', () => {
+      setNextTimer().should.be.a('function')
+    })
+
+    it('Should dispatch the next available timer', () => {
+      let _dispatch = sinon.spy()
+      const _thunk = setNextTimer()
+      _thunk(_dispatch, () => ({ current: 0, sequence: [ 'WORK', 'SHORT_PAUSE' ] }))
+
+      _dispatch.should.have.been.calledWith({ type: 'SET_CURRENT_TIMER', payload: 1 })
+
+      _thunk(_dispatch, () => ({ current: 1, sequence: [ 'WORK', 'SHORT_PAUSE' ] }))
+      _dispatch.should.have.been.calledWith({ type: 'SET_CURRENT_TIMER', payload: 0 })
+    })
+  })
+
+  describe('(Function) getNextTimerIndex', () => {
+    let _seq, _state
+
+    beforeEach(() => {
+      _seq = [ 'WORK', 'SHORT_PAUSE', 'WORK', 'LONG_PAUSE' ]
+      _state = { current: 0, sequence: _seq }
+    })
+
+    it('Should return next index on the sequence', () => {
+      getNextTimerIndex(_state).should.equal(1)
+
+      _state = { current: 1, sequence: _seq }
+      getNextTimerIndex(_state).should.equal(2)
+
+      _state = { current: 2, sequence: _seq }
+      getNextTimerIndex(_state).should.equal(3)
+    })
+
+    it('Should wrap on the edge of the sequence', () => {
+      _state = { current: 3, sequence: _seq }
+      getNextTimerIndex(_state).should.equal(0)
     })
   })
 

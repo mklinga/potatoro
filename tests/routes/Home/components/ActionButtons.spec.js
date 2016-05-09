@@ -12,6 +12,7 @@ describe('(Component) ActionButtons', () => {
       running: false,
       launch: (_spies.launch = sinon.spy()),
       reset: (_spies.reset = sinon.spy()),
+      next: (_spies.next = sinon.spy()),
       stop: (_spies.stop = sinon.spy())
     }
     _wrapper = shallow(<ActionButtons {..._props} />)
@@ -61,6 +62,28 @@ describe('(Component) ActionButtons', () => {
       _props.running = true
       _wrapper = shallow(<ActionButtons {..._props} />)
       _button = _wrapper.find('button').filterWhere(but => but.text() === 'Reset')
+
+      _button.should.not.exist
+    })
+  })
+
+  describe('Next button', () => {
+    let _button
+
+    beforeEach(() => {
+      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Next')
+    })
+
+    it('Should render with an <button> that triggers next() action when not running', () => {
+      _button.should.exist
+      _button.simulate('click')
+      _spies.next.should.have.been.called
+    })
+
+    it('Should not render reset button when running', () => {
+      _props.running = true
+      _wrapper = shallow(<ActionButtons {..._props} />)
+      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Next')
 
       _button.should.not.exist
     })

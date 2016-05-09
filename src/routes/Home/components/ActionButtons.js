@@ -13,6 +13,7 @@ export const ActionButtons = (props: Props.ActionButtons) => (
       <div>
         <button className={styles.launchButton} onClick={props.launch}>Launch!</button>
         <button className={styles.smallButton} onClick={props.reset}>Reset</button>
+        <button className={styles.smallButton} onClick={props.next}>Next</button>
       </div>
       )
     }
@@ -25,6 +26,7 @@ export const ActionButtons = (props: Props.ActionButtons) => (
 ActionButtons.propTypes = {
   running: React.PropTypes.bool.isRequired,
   launch: React.PropTypes.func.isRequired,
+  next: React.PropTypes.func.isRequired,
   stop: React.PropTypes.func.isRequired,
   reset: React.PropTypes.func.isRequired
 }
