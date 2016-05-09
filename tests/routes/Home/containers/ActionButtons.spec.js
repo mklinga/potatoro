@@ -15,7 +15,12 @@ describe('(Container) ActionButtons', () => {
 
   it('Should set needed properties', () => {
     _wrapper.props().should.have.property('launch')
+    _wrapper.props().should.have.property('reset')
     _wrapper.props().should.have.property('stop')
     _wrapper.props().should.have.property('running')
+  })
+
+  it('Should map reset to resetTimer with default argument (0)', () => {
+    _wrapper.props().reset().should.eql({ type: 'RESET_TIMER', payload: 0 })
   })
 })

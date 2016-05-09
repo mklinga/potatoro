@@ -5,12 +5,13 @@ import { shallow } from 'enzyme'
 
 describe('(Component) ActionButtons', () => {
   let _props, _spies, _wrapper
-
+  
   beforeEach(() => {
     _spies = {}
     _props = {
       running: false,
       launch: (_spies.launch = sinon.spy()),
+      reset: (_spies.reset = sinon.spy()),
       stop: (_spies.stop = sinon.spy())
     }
     _wrapper = shallow(<ActionButtons {..._props} />)
@@ -24,14 +25,7 @@ describe('(Component) ActionButtons', () => {
     let _button
 
     beforeEach(() => {
-      _spies = {}
-      _props = {
-        running: false,
-        launch: (_spies.launch = sinon.spy()),
-        stop: (_spies.stop = sinon.spy())
-      }
-      _wrapper = shallow(<ActionButtons {..._props} />)
-      _button = _wrapper.find('button')
+      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Launch!')
     })
 
     it('Should render with an <button> that triggers launch() action when not running', () => {
@@ -50,17 +44,32 @@ describe('(Component) ActionButtons', () => {
     })
   })
 
+  describe('Reset button', () => {
+    let _button
+
+    beforeEach(() => {
+      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Reset')
+    })
+
+    it('Should render with an <button> that triggers reset() action when not running', () => {
+      _button.should.exist
+      _button.simulate('click')
+      _spies.reset.should.have.been.called
+    })
+
+    it('Should not render reset button when running', () => {
+      _props.running = true
+      _wrapper = shallow(<ActionButtons {..._props} />)
+      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Reset')
+
+      _button.should.not.exist
+    })
+  })
+
   describe('(Link) Edit counters', () => {
     let _link
 
     beforeEach(() => {
-      _spies = {}
-      _props = {
-        running: false,
-        launch: (_spies.launch = sinon.spy()),
-        stop: (_spies.stop = sinon.spy())
-      }
-      _wrapper = shallow(<ActionButtons {..._props} />)
       _link = _wrapper.find(Link)
     })
 
