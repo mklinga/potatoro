@@ -9,16 +9,24 @@ export const ActionButtons = (props: Props.ActionButtons) => (
   <div>
     {props.running
       ? <button className={styles.launchButton} onClick={props.stop}>Pause</button>
-      : <button className={styles.launchButton} onClick={props.launch}>Launch!</button>
+      : (
+      <div>
+        <button className={styles.launchButton} onClick={props.launch}>Launch!</button>
+        <button className={styles.smallButton} onClick={props.reset}>Reset</button>
+      </div>
+      )
     }
-    {!props.running && <Link to='/edit'>Edit timers</Link>}
+    <div>
+      {!props.running && <Link to='/edit'>Edit timers</Link>}
+    </div>
   </div>
 )
 
 ActionButtons.propTypes = {
   running: React.PropTypes.bool.isRequired,
   launch: React.PropTypes.func.isRequired,
-  stop: React.PropTypes.func.isRequired
+  stop: React.PropTypes.func.isRequired,
+  reset: React.PropTypes.func.isRequired
 }
 
 export default ActionButtons

@@ -2,6 +2,7 @@ export type Props = {
   ActionButtons: {
     running: boolean,
     launch: () => Action,
+    reset: (value?: number) => Action,
     stop: () => Action
   },
   BigTimer: {
@@ -16,6 +17,7 @@ export type Props = {
 export type ActionCreators = {
   ActionButtons: {
     launch: () => Action,
+    reset: (value?: number) => Action,
     stop: () => Action
   },
   Potatoro: {

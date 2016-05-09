@@ -6,9 +6,11 @@ import type { ActionCreators } from 'types/home'
 import ActionButtons from '../components/ActionButtons'
 
 import { launch, stop } from '../modules/running'
+import { resetTimer } from '../modules/timerActions'
 
 const mapActionCreators: ActionCreators.ActionButtons = {
   launch,
+  reset: () => resetTimer(),
   stop
 }
 
