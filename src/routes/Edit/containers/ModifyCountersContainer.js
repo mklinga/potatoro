@@ -3,22 +3,18 @@ import { connect } from 'react-redux'
 
 import ModifyCounters from '../components/ModifyCounters'
 
-import type { Timer, TimerType } from '../interfaces/timer'
+import type { State } from 'types/timer'
+import type { ActionCreators } from 'types/edit'
 
 import { changeDuration } from '../modules/timers'
 import { changeSequence } from '../modules/sequence'
 
-const mapStateToProps = (state: { timers: Array<Timer>, sequence: Array<TimerType> }) => ({
+const mapStateToProps = (state: State) => ({
   sequence: state.sequence,
   timers: state.timers
 })
 
-type ActionCreators = {
-  changeDuration: (type: TimerType, duration: string) => Action,
-  changeSequence: (amountOfshortBreaks: number) => Action
-}
-
-const mapActionCreators: ActionCreators = {
+const mapActionCreators: ActionCreators.ModifyCountersContainer = {
   changeDuration,
   changeSequence
 }

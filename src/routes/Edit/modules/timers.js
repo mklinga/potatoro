@@ -1,31 +1,10 @@
 /* @flow */
 
-import type { Issue, TimerType, Timer } from '../interfaces/timer'
+import type { Issue, TimerType, Timer } from 'types/timer'
 import constants from '../constants'
 import init from '../../../init.js'
 
-// ------------------------------------
-// Validation
-// ------------------------------------
-
-type DurationAndIssuesFunction = (duration: string) => { duration?: number, issues: Array<Issue> }
-
-export const durationOrIssues: DurationAndIssuesFunction = (duration) => {
-  const hasIssues = (Number.isNaN(+duration) || +duration < constants.timer.min || +duration > constants.timer.max)
-
-  return hasIssues
-    ? { issues: [{ msg: 'Invalid duration', value: duration }] }
-    : { duration: Number(duration), issues: [] }
-}
-
-// ------------------------------------
-// Constants
-// ------------------------------------
 export const CHANGE_DURATION = 'CHANGE_DURATION'
-
-// ------------------------------------
-// Actions
-// ------------------------------------
 
 export function changeDuration (type: TimerType, duration: string): Action {
   return {
@@ -37,9 +16,16 @@ export function changeDuration (type: TimerType, duration: string): Action {
   }
 }
 
-// ------------------------------------
-// Action Handlers
-// ------------------------------------
+export const durationOrIssues: (duration: string) => { duration?: number, issues: Array<Issue> } =
+(duration) => {
+  const hasIssues = (Number.isNaN(+duration) ||
+                     +duration < constants.timer.min ||
+                     +duration > constants.timer.max)
+
+  return hasIssues
+    ? { issues: [{ msg: 'Invalid duration', value: duration }] }
+    : { duration: Number(duration), issues: [] }
+}
 
 const ACTION_HANDLERS = {
   [CHANGE_DURATION]:
@@ -51,10 +37,6 @@ const ACTION_HANDLERS = {
       })
     }
 }
-
-// ------------------------------------
-// Reducers
-// ------------------------------------
 
 export default function reducer (state: Array<Timer> = init.timers, action: Action): Array<Timer> {
   const handler = ACTION_HANDLERS[action.type]

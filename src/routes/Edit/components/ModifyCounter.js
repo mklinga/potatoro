@@ -1,13 +1,10 @@
 /* @flow */
 import React from 'react'
-import type { Timer, TimerType } from '../interfaces/timer'
+import type { Event } from 'types/event'
+import type { TimerType } from 'types/timer'
+import type { Props } from 'types/edit'
 import styles from './ModifyCounter.scss'
 import constants from '../constants.js'
-
-type Props = {
-  timer: Timer,
-  changeDuration: (type: TimerType, duration: string) => Action
-}
 
 export const labels = {
   WORK: 'Work period',
@@ -16,10 +13,10 @@ export const labels = {
 }
 
 export const _changeDuration = (type: TimerType, changeDuration: Props.changeDuration) => {
-  return (e: { target: { value: string } }) => changeDuration(type, e.target.value)
+  return (e: Event) => changeDuration(type, e.target.value)
 }
 
-export const ModifyCounter = (props: Props) => (
+export const ModifyCounter = (props: Props.ModifyCounter) => (
   <div key={props.timer.type} className={styles.timerRow}>
     <label>{labels[props.timer.type]}</label>
     <input

@@ -1,14 +1,10 @@
 /* @flow */
 import React from 'react'
+import type { Props } from 'types/home'
 
 import styles from './BigTimer.scss'
 
-type Props = {
-  disabled: boolean,
-  time: string
-}
-
-export const BigTimer = (props: Props) => (
+export const BigTimer = (props: Props.BigTimer) => (
   <div className={styles.bigTimer}>
     <span className={props.disabled ? styles.disabled : undefined}>
     {props.time}

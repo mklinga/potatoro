@@ -13,3 +13,10 @@ export type Timer = {
   issues: Array<Issue>
 }
 
+export type State = {
+  current: number,
+  elapsed: number,
+  running: boolean,
+  timers: Array<Timer>,
+  sequence: Array<TimerType>
+}

@@ -1,16 +1,11 @@
 /* @flow */
 import React from 'react'
 import { Link } from 'react-router'
+import type { Props } from 'types/home'
 
 import styles from './ActionButtons.scss'
 
-type Props = {
-  running: boolean,
-  launch: () => Action,
-  stop: () => Action
-}
-
-export const ActionButtons = (props: Props) => (
+export const ActionButtons = (props: Props.ActionButtons) => (
   <div>
     {props.running
       ? <button className={styles.launchButton} onClick={props.stop}>Pause</button>

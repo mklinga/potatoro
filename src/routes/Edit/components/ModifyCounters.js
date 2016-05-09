@@ -2,18 +2,12 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import type { Timer, TimerType } from '../interfaces/timer'
+import type { Timer, TimerType } from 'types/timer'
+import type { Props } from 'types/edit'
 
 import styles from './ModifyCounters.scss'
 import ModifyCounter from './ModifyCounter'
 import ToggleButton from 'components/ToggleButton'
-
-type Props = {
-  changeDuration: (type: TimerType, duration: string) => Action,
-  changeSequence: (amountOfshortBreaks: number) => Action,
-  timers: Array<Timer>,
-  sequence: Array<TimerType>
-}
 
 export const hasIssues: (timers: Array<Timer>) => boolean = (timers) => {
   return timers.reduce((issues, timer) => issues || timer.issues.length > 0, false)
@@ -23,7 +17,7 @@ export const getActiveFromSequence: (seq: Array<TimerType>) => number = (seq) =>
   return seq.length > 2 && seq[3] === 'SHORT_PAUSE' ? 2 : 1
 }
 
-export const ModifyCounters = (props: Props) => (
+export const ModifyCounters = (props: Props.ModifyCounters) => (
   <div className={styles.modifyCounters}>
     <h3>Durations</h3>
     <div className={styles.counters}>

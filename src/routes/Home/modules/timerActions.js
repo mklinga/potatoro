@@ -1,6 +1,7 @@
 /* @flow */
 import { setCurrent } from './current'
 import { stop } from './running'
+import type { State, Timer } from 'types/timer'
 
 import init from '../../../init'
 
@@ -11,9 +12,9 @@ export const RESET_TIMER = 'RESET_TIMER'
 export const START_TIMER = 'START_TIMER'
 export const STOP_TIMER = 'STOP_TIMER'
 
-export const findTimerByType = (state: Object) => (timer: Object) => timer.type === state.sequence[state.current]
+export const findTimerByType = (state: State) => (timer: Timer) => timer.type === state.sequence[state.current]
 
-const _timerFinished = (dispatch, state) => {
+const _timerFinished = (dispatch: Function, state: State) => {
   dispatch(stop())
   dispatch(resetTimer())
 
@@ -23,7 +24,7 @@ const _timerFinished = (dispatch, state) => {
   showNotification('Potatoro', { body: 'Time\'s up!' })
 }
 
-const _tick = (tickLength: number) => (dispatch, getState) => {
+const _tick = (tickLength: number) => (dispatch: Function, getState: Function) => {
   return window.setInterval(() => {
     const state = getState()
 
@@ -70,13 +71,8 @@ const ACTION_HANDLERS = {
   [RESET_TIMER]: (state: number, action: { payload: number }): number => action.payload
 }
 
-// ------------------------------------
-// Reducers
-// ------------------------------------
-
 export default function reducer (state: number = init.elapsed, action: Action): number {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
 }
-
