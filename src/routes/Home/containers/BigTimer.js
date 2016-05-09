@@ -16,7 +16,7 @@ export const countTimeLeft = (state: State): number => {
   return (currentTimer.duration * 60) - state.elapsed
 }
 
-export const padLeft = (sec: number) => sec < 10 ? `0${sec}` : sec
+export const padLeft = (sec: number): string => sec < 10 ? `0${sec}` : sec.toString()
 
 export const formatTimer = (seconds: number) => {
   return `${Math.floor(seconds / 60)}:${padLeft(seconds % 60)}`
