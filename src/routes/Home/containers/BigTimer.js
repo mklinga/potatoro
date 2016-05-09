@@ -1,4 +1,5 @@
 /* @flow */
+import { propEq, pipe } from 'klutils'
 import { connect } from 'react-redux'
 
 import BigTimer from '../components/BigTimer'
@@ -10,19 +11,19 @@ type State = {
   timers: Array<{ type: string, duration: number, issues: Array<Object> }>
 }
 
-export const _countTimeLeft = (state: State) => {
-  const currentTimer = state.timers.find(timer => timer.type === state.sequence[state.current])
+export const countTimeLeft = (state: State): number => {
+  const currentTimer = state.timers.find(propEq('type', state.sequence[state.current]))
   return (currentTimer.duration * 60) - state.elapsed
 }
 
-export const _padLeft = (sec: number) => sec < 10 ? `0${sec}` : sec
+export const padLeft = (sec: number) => sec < 10 ? `0${sec}` : sec
 
-export const _formatTimer = (seconds: number) => {
-  return `${Math.floor(seconds / 60)}:${_padLeft(seconds % 60)}`
+export const formatTimer = (seconds: number) => {
+  return `${Math.floor(seconds / 60)}:${padLeft(seconds % 60)}`
 }
 
 const mapStateToProps = (state) => ({
-  time: _formatTimer(_countTimeLeft(state)),
+  time: pipe(countTimeLeft, formatTimer)(state),
   disabled: !state.running
 })
 
