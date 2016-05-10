@@ -1,7 +1,7 @@
 /* @flow */
 
 import type { Issue, TimerType, Timer } from 'types/timer'
-import constants from '../constants'
+import { TIMER } from 'utils/constants'
 import init from '../../../init.js'
 
 import { makeReducer } from 'utils/reducer'
@@ -20,9 +20,7 @@ export function changeDuration (type: TimerType, duration: string): Action {
 
 export const durationOrIssues: (duration: string) => { duration?: number, issues: Array<Issue> } =
 (duration) => {
-  const hasIssues = (Number.isNaN(+duration) ||
-                     +duration < constants.timer.min ||
-                     +duration > constants.timer.max)
+  const hasIssues = (Number.isNaN(+duration) || +duration < TIMER.min || +duration > TIMER.max)
 
   return hasIssues
     ? { issues: [{ msg: 'Invalid duration', value: duration }] }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { ModifyCounter, _changeDuration } from 'routes/Edit/components/ModifyCounter'
-import { labels } from 'constants.js'
+import { LABELS } from 'utils/constants.js'
 import { shallow } from 'enzyme'
 
 describe('(Component) ModifyCounter', () => {
@@ -34,7 +34,7 @@ describe('(Component) ModifyCounter', () => {
         _props.timer.type = type
         _wrapper = shallow(<ModifyCounter {..._props} />)
         _label = _wrapper.find('label')
-        _label.text().should.equal(labels[type])
+        _label.text().should.equal(LABELS[type])
       })
     })
   })

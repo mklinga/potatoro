@@ -4,8 +4,7 @@ import type { Event } from 'types/event'
 import type { TimerType } from 'types/timer'
 import type { Props } from 'types/edit'
 import styles from './ModifyCounter.scss'
-import constants from '../constants.js'
-import { labels } from 'constants.js'
+import { LABELS, TIMER } from 'utils/constants.js'
 
 export const _changeDuration = (type: TimerType, changeDuration: Props.changeDuration) => {
   return (e: Event) => changeDuration(type, e.target.value)
@@ -13,12 +12,12 @@ export const _changeDuration = (type: TimerType, changeDuration: Props.changeDur
 
 export const ModifyCounter = (props: Props.ModifyCounter) => (
   <div key={props.timer.type} className={styles.timerRow}>
-    <label>{labels[props.timer.type]}</label>
+    <label>{LABELS[props.timer.type]}</label>
     <input
       className={props.timer.issues.length && styles.hasIssues}
       key={props.timer.type}
-      min={constants.timer.min}
-      max={constants.timer.max}
+      min={TIMER.min}
+      max={TIMER.max}
       onChange={_changeDuration(props.timer.type, props.changeDuration)}
       title={props.timer.issues.length ? props.timer.issues[0].msg : undefined}
       type='number'
