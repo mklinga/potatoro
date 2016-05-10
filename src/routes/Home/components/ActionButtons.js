@@ -5,6 +5,13 @@ import type { Props } from 'types/home'
 
 import styles from './ActionButtons.scss'
 
+const _clickAction = action => {
+  return e => {
+    e.preventDefault()
+    action()
+  }
+}
+
 export const ActionButtons = (props: Props.ActionButtons) => (
   <div>
     {props.running
@@ -12,14 +19,14 @@ export const ActionButtons = (props: Props.ActionButtons) => (
       : (
       <div>
         <button className={styles.launchButton} onClick={props.launch}>Launch!</button>
-        <button className={styles.smallButton} onClick={props.reset}>Reset</button>
-        <button className={styles.smallButton} onClick={props.next}>Next</button>
+        <div>
+          <a href='#' className={styles.actionLink} onClick={_clickAction(props.reset)}>Reset</a>
+          <Link to='/edit'>Edit timers</Link>
+          <a href='#' className={styles.actionLink} onClick={_clickAction(props.next)}>Next</a>
+        </div>
       </div>
       )
     }
-    <div>
-      {!props.running && <Link to='/edit'>Edit timers</Link>}
-    </div>
   </div>
 )
 
