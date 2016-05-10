@@ -4,6 +4,8 @@ import type { Issue, TimerType, Timer } from 'types/timer'
 import constants from '../constants'
 import init from '../../../init.js'
 
+import { makeReducer } from 'utils/reducer'
+
 export const CHANGE_DURATION = 'CHANGE_DURATION'
 
 export function changeDuration (type: TimerType, duration: string): Action {
@@ -27,7 +29,7 @@ export const durationOrIssues: (duration: string) => { duration?: number, issues
     : { duration: Number(duration), issues: [] }
 }
 
-const ACTION_HANDLERS = {
+export default makeReducer(init.timers, {
   [CHANGE_DURATION]:
     (state: Array<Timer>, action: { payload: { type: TimerType, duration: string } }): Array<Timer> => {
       return state.map(timer => {
@@ -36,10 +38,4 @@ const ACTION_HANDLERS = {
           : timer
       })
     }
-}
-
-export default function reducer (state: Array<Timer> = init.timers, action: Action): Array<Timer> {
-  const handler = ACTION_HANDLERS[action.type]
-
-  return handler ? handler(state, action) : state
-}
+})

@@ -1,6 +1,9 @@
 /* @flow */
+import { pipe } from 'klutils'
+
 import { setCurrent, getNextTimerIndex } from './current'
 import { stop } from './running'
+
 import type { State, Timer } from 'types/timer'
 
 import init from '../../../init'
@@ -8,6 +11,7 @@ import init from '../../../init'
 import { showNotification } from 'utils/notifications'
 import { getFormattedTime } from 'utils/timeFormat'
 import { setPageTitle } from 'utils/document'
+import makeReducer from 'utils/reducer'
 
 export const MODIFY_TIMER = 'MODIFY_TIMER'
 export const RESET_TIMER = 'RESET_TIMER'
@@ -20,7 +24,8 @@ const _timerFinished = (dispatch: Function, state: State) => {
   dispatch(stop())
   dispatch(resetTimer())
 
-  dispatch(setCurrent(getNextTimerIndex(state)))
+  const _setNextTimerBasedOnState = pipe(getNextTimerIndex, setCurrent, dispatch)
+  _setNextTimerBasedOnState(state)
 
   showNotification('Potatoro', { body: 'Time\'s up!' })
 }
@@ -71,13 +76,10 @@ export function stopTimer (timerId: number): () => void {
   return () => window.clearInterval(timerId)
 }
 
-const ACTION_HANDLERS = {
-  [MODIFY_TIMER]: (state: number, action: { payload: number }): number => state + action.payload,
-  [RESET_TIMER]: (state: number, action: { payload: number }): number => action.payload
-}
+const modifyTimerHandler = (state: number, action: { payload: number }): number => state + action.payload
+const resetTimerHandler = (state: number, action: { payload: number }): number => action.payload
 
-export default function reducer (state: number = init.elapsed, action: Action): number {
-  const handler = ACTION_HANDLERS[action.type]
-
-  return handler ? handler(state, action) : state
-}
+export default makeReducer(init.elapsed, {
+  [MODIFY_TIMER]: modifyTimerHandler,
+  [RESET_TIMER]: resetTimerHandler
+})

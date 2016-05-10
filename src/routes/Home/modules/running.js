@@ -1,6 +1,8 @@
 /* @flow */
 import init from '../../../init'
 
+import { makeReducer } from 'utils/reducer'
+
 export const LAUNCH_POTATORO = 'LAUNCH_POTATORO'
 export const STOP_POTATORO = 'STOP_POTATORO'
 
@@ -16,14 +18,7 @@ export function stop (): Action {
   }
 }
 
-const ACTION_HANDLERS = {
+export default makeReducer(init.running, {
   [LAUNCH_POTATORO]: (state: boolean): boolean => true,
   [STOP_POTATORO]: (state: boolean): boolean => false
-}
-
-export default function reducer (state: boolean = init.running, action: Action): boolean {
-  const handler = ACTION_HANDLERS[action.type]
-
-  return handler ? handler(state, action) : state
-}
-
+})

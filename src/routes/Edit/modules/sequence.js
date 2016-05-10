@@ -3,6 +3,8 @@
 import type { TimerType } from 'types/timer'
 import init from '../../../init'
 
+import { makeReducer } from 'utils/reducer'
+
 export const CHANGE_SEQUENCE = 'CHANGE_SEQUENCE'
 
 export const ALLOWED_SEQUENCES = {
@@ -19,16 +21,9 @@ export function changeSequence (amountOfshortBreaks: number): Action {
   }
 }
 
-const ACTION_HANDLERS = {
+export default makeReducer(init.sequence, {
   [CHANGE_SEQUENCE]:
     (state: Array<TimerType>, action: { payload: { amountOfshortBreaks: number } }): Array<TimerType> => {
       return ALLOWED_SEQUENCES[action.payload.amountOfshortBreaks] || state
     }
-}
-
-export default function reducer (state: Array<TimerType> = init.sequence, action: Action): Array<TimerType> {
-  const handler = ACTION_HANDLERS[action.type]
-
-  return handler ? handler(state, action) : state
-}
-
+})

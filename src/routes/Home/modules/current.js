@@ -3,6 +3,10 @@ import init from '../../../init'
 
 import { resetTimer } from './timerActions'
 
+import type { State } from 'types/timer'
+
+import { makeReducer } from 'utils/reducer'
+
 export const SET_CURRENT_TIMER = 'SET_CURRENT_TIMER'
 
 export function setCurrent (index: number): Action {
@@ -25,12 +29,6 @@ export function setNextTimer (): (dispatch: Function, getState: Function) => voi
   }
 }
 
-const ACTION_HANDLERS = {
+export default makeReducer(init.current, {
   [SET_CURRENT_TIMER]: (state: number, action: { payload: number }): number => action.payload
-}
-
-export default function reducer (state: number = init.current, action: Action): number {
-  const handler = ACTION_HANDLERS[action.type]
-  return handler ? handler(state, action) : state
-}
-
+})
