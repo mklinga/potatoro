@@ -6,6 +6,8 @@ import type { State, Timer } from 'types/timer'
 import init from '../../../init'
 
 import { showNotification } from 'utils/notifications'
+import { getFormattedTime } from 'utils/timeFormat'
+import { setPageTitle } from 'utils/document'
 
 export const MODIFY_TIMER = 'MODIFY_TIMER'
 export const RESET_TIMER = 'RESET_TIMER'
@@ -37,6 +39,8 @@ const _tick = (tickLength: number) => (dispatch: Function, getState: Function) =
 
         if ((state.elapsed >= durationInSeconds)) {
           _timerFinished(dispatch, state)
+        } else {
+          setPageTitle(getFormattedTime({ ...state, elapsed: state.elapsed + 1 }))
         }
       }
     }
@@ -44,6 +48,8 @@ const _tick = (tickLength: number) => (dispatch: Function, getState: Function) =
 }
 
 export function resetTimer (value: number = 0): Action {
+  setPageTitle(undefined)
+
   return {
     type: RESET_TIMER,
     payload: value
