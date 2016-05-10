@@ -5,12 +5,7 @@ import type { TimerType } from 'types/timer'
 import type { Props } from 'types/edit'
 import styles from './ModifyCounter.scss'
 import constants from '../constants.js'
-
-export const labels = {
-  WORK: 'Work period',
-  SHORT_PAUSE: 'Short break',
-  LONG_PAUSE: 'Long break'
-}
+import { labels } from 'constants.js'
 
 export const _changeDuration = (type: TimerType, changeDuration: Props.changeDuration) => {
   return (e: Event) => changeDuration(type, e.target.value)

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import SequenceView from 'routes/Home/components/SequenceView'
+import { labels } from 'constants.js'
 import { shallow } from 'enzyme'
 
 describe('(Component) SequenceView', () => {
@@ -28,12 +29,12 @@ describe('(Component) SequenceView', () => {
 
     it('Should show current action', () => {
       _current.should.exist
-      _current.text().should.equal('WORK')
+      _current.text().should.equal(labels['WORK'])
 
       _props.current = 'SHORT_PAUSE'
       _wrapper = shallow(<SequenceView {..._props} />)
       _current = _wrapper.find('span')
-      _current.text().should.equal('SHORT_PAUSE')
+      _current.text().should.equal(labels['SHORT_PAUSE'])
     })
   })
 })
