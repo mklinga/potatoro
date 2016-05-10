@@ -45,47 +45,47 @@ describe('(Component) ActionButtons', () => {
     })
   })
 
-  describe('Reset button', () => {
-    let _button
+  describe('Reset link', () => {
+    let _link
 
     beforeEach(() => {
-      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Reset')
+      _link = _wrapper.find('a').filterWhere(but => but.text() === 'Reset')
     })
 
-    it('Should render with an <button> that triggers reset() action when not running', () => {
-      _button.should.exist
-      _button.simulate('click')
+    it('Should render with an <a> that triggers reset() action when not running', () => {
+      _link.should.exist
+      _link.simulate('click', { preventDefault: () => {} })
       _spies.reset.should.have.been.called
     })
 
-    it('Should not render reset button when running', () => {
+    it('Should not render reset link when running', () => {
       _props.running = true
       _wrapper = shallow(<ActionButtons {..._props} />)
-      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Reset')
+      _link = _wrapper.find('a').filterWhere(but => but.text() === 'Reset')
 
-      _button.should.not.exist
+      _link.should.not.exist
     })
   })
 
-  describe('Next button', () => {
-    let _button
+  describe('Next link', () => {
+    let _link
 
     beforeEach(() => {
-      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Next')
+      _link = _wrapper.find('a').filterWhere(but => but.text() === 'Next')
     })
 
-    it('Should render with an <button> that triggers next() action when not running', () => {
-      _button.should.exist
-      _button.simulate('click')
+    it('Should render with an <a> that triggers next() action when not running', () => {
+      _link.should.exist
+      _link.simulate('click', { preventDefault: () => {} })
       _spies.next.should.have.been.called
     })
 
-    it('Should not render reset button when running', () => {
+    it('Should not render reset link when running', () => {
       _props.running = true
       _wrapper = shallow(<ActionButtons {..._props} />)
-      _button = _wrapper.find('button').filterWhere(but => but.text() === 'Next')
+      _link = _wrapper.find('a').filterWhere(but => but.text() === 'Next')
 
-      _button.should.not.exist
+      _link.should.not.exist
     })
   })
 
